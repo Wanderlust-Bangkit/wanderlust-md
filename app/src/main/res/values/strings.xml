@@ -7,4 +7,6 @@
     <string name="get_started">Get Started</string>
     <string name="background_image">Background image</string>
     <string name="text_onboarding_1_sub">Explore the beauty of Indonesia customized just for you and only you.</string>
+    <string name="cat">cat</string>
+    <string name="image">image</string>
 </resources>
