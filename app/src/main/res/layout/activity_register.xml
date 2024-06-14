@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.register.RegisterActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="400dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/backgroundImage"
         android:layout_width="match_parent"
@@ -13,11 +25,12 @@
         android:scaleType="centerCrop"
         android:src="@drawable/login_bg"
         android:contentDescription="@string/background_image"/>
+
     <TextView
         android:id="@+id/exploreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Explore More With Wanderlust"
+        android:text="@string/explore_more_with_wanderlust"
         android:textColor="@color/md_theme_primary"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -55,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="16dp"
-                android:text="Register"
+                android:text="@string/register"
                 android:textColor="@color/md_theme_primary"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -69,59 +82,51 @@
                     android:id="@+id/editTextName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name" />
+                    android:hint="@string/name" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/editTextUsername"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Username" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <com.dicoding.wanderlust.ui.customview.CustomEditText
                     android:id="@+id/editTextEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="@string/email"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.dicoding.wanderlust.ui.customview.CustomEditText
                     android:id="@+id/editTextPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.dicoding.wanderlust.ui.customview.CustomEditText
                     android:id="@+id/editTextConfirmPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm Password"
+                    android:hint="@string/confirm_password"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonRegister"
@@ -129,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:backgroundTint="@color/md_theme_primary"
-                android:text="Register"
+                android:text="@string/register"
                 android:textAllCaps="false"
                 android:textColor="@color/md_theme_onPrimary"
                 app:cornerRadius="20dp" />
@@ -140,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:text="Don't have an account yet? Register"
+                android:text="@string/already_have_an_account_login"
                 android:textColor="@color/md_theme_primary"
                 android:textSize="14sp"/>
 
