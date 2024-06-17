@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController)
         navView.setupWithNavController(navController)
 
-        // Navigate to home destination
         navController.navigate(R.id.navigation_home)
     }
 
