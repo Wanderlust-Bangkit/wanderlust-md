@@ -18,7 +18,7 @@
         tools:layout="@layout/fragment_itinerary" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_profile"
         android:name="com.dicoding.wanderlust.ui.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />

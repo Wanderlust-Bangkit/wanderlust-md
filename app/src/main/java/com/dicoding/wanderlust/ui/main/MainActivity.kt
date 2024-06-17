@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         navController.navigate(R.id.navigation_home)
+        navController.navigate(R.id.navigation_profile)
     }
 
     private fun navigateToRegister() {

@@ -75,6 +75,7 @@ class LoginActivity : AppCompatActivity() {
                             viewModel.saveSession(
                                 UserModel(
                                     sessionData.loginResult?.name ?: "",
+                                    sessionData.loginResult?.email ?: "",
                                     sessionData.loginResult?.token ?: "",
                                     true
                                 )
