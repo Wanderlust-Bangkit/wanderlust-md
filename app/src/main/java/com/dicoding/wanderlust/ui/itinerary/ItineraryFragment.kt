@@ -27,16 +27,16 @@ class ItineraryFragment : Fragment() {
 
         itineraryViewModel = ViewModelProvider(this).get(ItineraryViewModel::class.java)
 
-        etName = rootView.findViewById(R.id.etName)
-        lvDestinations = rootView.findViewById(R.id.lvDestinations)
-        btnStartDate = rootView.findViewById(R.id.btnStartDate)
-        btnEndDate = rootView.findViewById(R.id.btnEndDate)
-        calendarView = rootView.findViewById(R.id.calendarView)
-        formScrollView = rootView.findViewById(R.id.formScrollView)
-
-        rootView.findViewById<Button>(R.id.btnToggleDestinations).setOnClickListener {
-            toggleListViewVisibility()
-        }
+//        etName = rootView.findViewById(R.id.etName)
+//        lvDestinations = rootView.findViewById(R.id.lvDestinations)
+//        btnStartDate = rootView.findViewById(R.id.btnStartDate)
+//        btnEndDate = rootView.findViewById(R.id.btnEndDate)
+//        calendarView = rootView.findViewById(R.id.calendarView)
+//        formScrollView = rootView.findViewById(R.id.formScrollView)
+//
+//        rootView.findViewById<Button>(R.id.btnToggleDestinations).setOnClickListener {
+//            toggleListViewVisibility()
+//        }
 
         lvDestinations.setOnItemClickListener { _, _, position, _ ->
             // Handle destination selection

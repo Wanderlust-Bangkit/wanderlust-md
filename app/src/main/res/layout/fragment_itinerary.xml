@@ -2,226 +2,226 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ItineraryFragment">
+    tools:context=".ui.itinerary.ItineraryFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:padding="16dp">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Choose a Travel Theme"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:paddingBottom="16dp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Choose a Travel Theme"-->
+<!--                android:textSize="24sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:paddingBottom="16dp" />-->
 
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:rowCount="2"
-                android:layout_gravity="center">
+<!--            <GridLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:columnCount="2"-->
+<!--                android:rowCount="2"-->
+<!--                android:layout_gravity="center">-->
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_margin="8dp"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:onClick="onThemeSelected"
-                    android:tag="historical">
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="200dp"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_rowWeight="1"-->
+<!--                    android:onClick="onThemeSelected"-->
+<!--                    android:tag="historical">-->
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/historical_image" />
+<!--                    <ImageView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/historical_image" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Historical"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        android:layout_gravity="center"
-                        android:background="#AA000000"
-                        android:padding="8dp" />
-                </androidx.cardview.widget.CardView>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Historical"-->
+<!--                        android:textColor="#FFFFFF"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:background="#AA000000"-->
+<!--                        android:padding="8dp" />-->
+<!--                </androidx.cardview.widget.CardView>-->
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_margin="8dp"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:onClick="onThemeSelected"
-                    android:tag="park">
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="200dp"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_rowWeight="1"-->
+<!--                    android:onClick="onThemeSelected"-->
+<!--                    android:tag="park">-->
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/park_image" />
+<!--                    <ImageView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/park_image" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Park"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        android:layout_gravity="center"
-                        android:background="#AA000000"
-                        android:padding="8dp" />
-                </androidx.cardview.widget.CardView>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Park"-->
+<!--                        android:textColor="#FFFFFF"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:background="#AA000000"-->
+<!--                        android:padding="8dp" />-->
+<!--                </androidx.cardview.widget.CardView>-->
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_margin="8dp"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:onClick="onThemeSelected"
-                    android:tag="beach">
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="200dp"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_rowWeight="1"-->
+<!--                    android:onClick="onThemeSelected"-->
+<!--                    android:tag="beach">-->
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/beach_image" />
+<!--                    <ImageView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/beach_image" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Beach"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        android:layout_gravity="center"
-                        android:background="#AA000000"
-                        android:padding="8dp" />
-                </androidx.cardview.widget.CardView>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Beach"-->
+<!--                        android:textColor="#FFFFFF"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:background="#AA000000"-->
+<!--                        android:padding="8dp" />-->
+<!--                </androidx.cardview.widget.CardView>-->
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="200dp"
-                    android:layout_margin="8dp"
-                    android:layout_columnWeight="1"
-                    android:layout_rowWeight="1"
-                    android:onClick="onThemeSelected"
-                    android:tag="city">
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="200dp"-->
+<!--                    android:layout_margin="8dp"-->
+<!--                    android:layout_columnWeight="1"-->
+<!--                    android:layout_rowWeight="1"-->
+<!--                    android:onClick="onThemeSelected"-->
+<!--                    android:tag="city">-->
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/city_image" />
+<!--                    <ImageView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/city_image" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="City"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        android:layout_gravity="center"
-                        android:background="#AA000000"
-                        android:padding="8dp" />
-                </androidx.cardview.widget.CardView>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="City"-->
+<!--                        android:textColor="#FFFFFF"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:background="#AA000000"-->
+<!--                        android:padding="8dp" />-->
+<!--                </androidx.cardview.widget.CardView>-->
 
-            </GridLayout>
+<!--            </GridLayout>-->
 
-            <ScrollView
-                android:id="@+id/formScrollView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp"
-                android:visibility="gone">
+<!--            <ScrollView-->
+<!--                android:id="@+id/formScrollView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:padding="16dp"-->
+<!--                android:visibility="gone">-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical">-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Enter Your Details"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:paddingBottom="16dp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Enter Your Details"-->
+<!--                        android:textSize="24sp"-->
+<!--                        android:textStyle="bold"-->
+<!--                        android:paddingBottom="16dp" />-->
 
-                    <EditText
-                        android:id="@+id/etName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Name"
-                        android:padding="8dp"
-                        android:layout_marginBottom="16dp"
-                        android:inputType="textPersonName" />
+<!--                    <EditText-->
+<!--                        android:id="@+id/etName"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:hint="Name"-->
+<!--                        android:padding="8dp"-->
+<!--                        android:layout_marginBottom="16dp"-->
+<!--                        android:inputType="textPersonName" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Choose Destination"
-                        android:textSize="18sp"
-                        android:layout_marginBottom="8dp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Choose Destination"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:layout_marginBottom="8dp" />-->
 
-                    <Button
-                        android:id="@+id/btnToggleDestinations"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Select Destination" />
+<!--                    <Button-->
+<!--                        android:id="@+id/btnToggleDestinations"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Select Destination" />-->
 
-                    <ListView
-                        android:id="@+id/lvDestinations"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:divider="@android:color/darker_gray"
-                        android:dividerHeight="1dp"
-                        android:visibility="gone" />
+<!--                    <ListView-->
+<!--                        android:id="@+id/lvDestinations"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="200dp"-->
+<!--                        android:divider="@android:color/darker_gray"-->
+<!--                        android:dividerHeight="1dp"-->
+<!--                        android:visibility="gone" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Select Dates"
-                        android:textSize="18sp"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="8dp" />
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Select Dates"-->
+<!--                        android:textSize="18sp"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:layout_marginBottom="8dp" />-->
 
-                    <Button
-                        android:id="@+id/btnStartDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Start Date" />
+<!--                    <Button-->
+<!--                        android:id="@+id/btnStartDate"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Start Date" />-->
 
-                    <Button
-                        android:id="@+id/btnEndDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="End Date"
-                        android:layout_marginTop="8dp" />
+<!--                    <Button-->
+<!--                        android:id="@+id/btnEndDate"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="End Date"-->
+<!--                        android:layout_marginTop="8dp" />-->
 
-                    <CalendarView
-                        android:id="@+id/calendarView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:layout_marginTop="16dp" />
+<!--                    <CalendarView-->
+<!--                        android:id="@+id/calendarView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:visibility="gone"-->
+<!--                        android:layout_marginTop="16dp" />-->
 
-                    <Button
-                        android:id="@+id/btnSubmit"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Submit"
-                        android:layout_marginTop="16dp" />
-                </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
+<!--                    <Button-->
+<!--                        android:id="@+id/btnSubmit"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Submit"-->
+<!--                        android:layout_marginTop="16dp" />-->
+<!--                </LinearLayout>-->
+<!--            </ScrollView>-->
+<!--        </LinearLayout>-->
     </ScrollView>
 </RelativeLayout>
