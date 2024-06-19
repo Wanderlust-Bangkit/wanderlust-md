@@ -43,9 +43,15 @@ interface ApiService {
     suspend fun addFavorite(
         @Field("destinationId") destinationId: String
     ): CommonResponse
+
     @POST("deleteFavorit")
     suspend fun deleteFavorite(
         @Field("destinationId") destinationId: String
     ): CommonResponse
+
+    @GET("favorit/{userId}")
+    suspend fun getAllFavorites(
+        @Path("userId") userId: String
+    ): DestinationResponse
 
 }

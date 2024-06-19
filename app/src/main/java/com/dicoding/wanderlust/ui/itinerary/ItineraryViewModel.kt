@@ -3,9 +3,10 @@ package com.dicoding.wanderlust.ui.itinerary
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.util.*
+import com.dicoding.wanderlust.repository.Repository
+import java.util.Date
 
-class ItineraryViewModel : ViewModel() {
+class ItineraryViewModel(repository: Repository) : ViewModel() {
 
     private val _name = MutableLiveData<String>()
     val name: LiveData<String> = _name
