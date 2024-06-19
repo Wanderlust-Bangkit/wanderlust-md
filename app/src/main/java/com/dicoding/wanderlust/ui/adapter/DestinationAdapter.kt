@@ -37,10 +37,6 @@ class DestinationAdapter(private val onItemClick: (DataItem) -> Unit) :
                 }
                 tvLokasiDestinasi.text = destination.city
 
-                // Glide.with(root)
-                //     .load(story.photoUrl)
-                //     .transition(DrawableTransitionOptions.withCrossFade())
-                //     .into(ivItemPhoto)
             }
         }
     }

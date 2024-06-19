@@ -47,13 +47,12 @@
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:hint="@string/searchbar_hint"
-                android:background="#F3F3F3"
+                android:background="@drawable/rounded_edittext_background"
                 android:padding="12dp"
                 android:layout_margin="16dp"
                 android:drawableStart="@drawable/ic_search"
                 android:drawablePadding="8dp"
                 android:inputType="text" />
-
 
         </LinearLayout>
 
@@ -141,7 +140,7 @@
                             android:layout_width="34dp"
                             android:layout_height="34dp"
                             android:contentDescription="@string/image"
-                            android:src="@drawable/gunung"/>
+                            android:src="@drawable/budaya"/>
 
                     </LinearLayout>
 
@@ -151,17 +150,19 @@
                         android:layout_below="@id/category_container_1"
                         android:layout_marginTop="4dp"
                         android:layout_centerHorizontal="true"
-                        android:text="@string/gunung"
+                        android:text="@string/budaya"
                         android:textColor="@android:color/black"
                         android:textSize="12sp"/>
 
                 </RelativeLayout>
 
                 <!-- Category item 2 -->
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp">
+                    android:orientation="vertical"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_horizontal">
 
                     <LinearLayout
                         android:id="@+id/category_container_2"
@@ -169,34 +170,36 @@
                         android:layout_height="60dp"
                         android:background="#F3F3F3"
                         android:padding="8dp"
-                        android:gravity="center"
-                        android:layout_gravity="center_vertical">
+                        android:gravity="center">
 
                         <ImageView
                             android:layout_width="34dp"
                             android:layout_height="34dp"
                             android:contentDescription="@string/image"
-                            android:src="@drawable/pantai"/>
+                            android:src="@drawable/taman_hiburan" />
 
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/category_container_2"
                         android:layout_marginTop="4dp"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/pantai"
+                        android:text="@string/taman_hiburan"
                         android:textColor="@android:color/black"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:layout_gravity="center_horizontal"/>
+                </LinearLayout>
 
-                </RelativeLayout>
 
                 <!-- Category item 3 -->
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp">
+                    android:orientation="vertical"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_horizontal">
 
                     <LinearLayout
                         android:id="@+id/category_container_3"
@@ -204,28 +207,27 @@
                         android:layout_height="60dp"
                         android:background="#F3F3F3"
                         android:padding="8dp"
-                        android:gravity="center"
-                        android:layout_gravity="center_vertical">
+                        android:gravity="center">
 
                         <ImageView
                             android:layout_width="34dp"
                             android:layout_height="34dp"
                             android:contentDescription="@string/image"
-                            android:src="@drawable/hutan"/>
+                            android:src="@drawable/cagar_alam" />
 
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/category_container_3"
                         android:layout_marginTop="4dp"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/hutan"
+                        android:text="@string/cagar_alam"
                         android:textColor="@android:color/black"
-                        android:textSize="12sp"/>
-
-                </RelativeLayout>
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:layout_gravity="center_horizontal"/>
+                </LinearLayout>
 
                 <!-- Category item 4 -->
                 <RelativeLayout
@@ -246,7 +248,7 @@
                             android:layout_width="34dp"
                             android:layout_height="34dp"
                             android:contentDescription="@string/image"
-                            android:src="@drawable/taman"/>
+                            android:src="@drawable/bahari"/>
 
                     </LinearLayout>
 
@@ -256,17 +258,19 @@
                         android:layout_below="@id/category_container_4"
                         android:layout_marginTop="4dp"
                         android:layout_centerHorizontal="true"
-                        android:text="@string/taman"
+                        android:text="@string/bahari"
                         android:textColor="@android:color/black"
                         android:textSize="12sp"/>
 
                 </RelativeLayout>
 
                 <!-- Category item 5 -->
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp">
+                    android:orientation="vertical"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_horizontal">
 
                     <LinearLayout
                         android:id="@+id/category_container_5"
@@ -274,35 +278,67 @@
                         android:layout_height="60dp"
                         android:background="#F3F3F3"
                         android:padding="8dp"
-                        android:gravity="center"
-                        android:layout_gravity="center_vertical">
+                        android:gravity="center">
 
                         <ImageView
                             android:layout_width="34dp"
                             android:layout_height="34dp"
                             android:contentDescription="@string/image"
-                            android:src="@drawable/perairan"/>
+                            android:src="@drawable/pusat_perbelanjaan" />
 
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/category_container_5"
-                        android:layout_centerHorizontal="true"
                         android:layout_marginTop="4dp"
-                        android:text="@string/perairan"
+                        android:text="@string/pusat_perbelanjaan"
                         android:textColor="@android:color/black"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:layout_gravity="center_horizontal"/>
+                </LinearLayout>
 
-                </RelativeLayout>
+                <!-- Category item 6 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_horizontal">
 
-                <!-- Add more category items as needed -->
+                    <LinearLayout
+                        android:id="@+id/category_container_6"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="#F3F3F3"
+                        android:padding="8dp"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:contentDescription="@string/image"
+                            android:src="@drawable/tempat_ibadah" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/tempat_ibadah"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:layout_gravity="center_horizontal"/>
+                </LinearLayout>
 
             </LinearLayout>
         </HorizontalScrollView>
 
-        <!-- Destinasi yang mungkin kamu sukai Section -->
         <TextView
             android:id="@+id/tvTopDestination"
             android:layout_width="wrap_content"
@@ -338,15 +374,16 @@
             android:textStyle="bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_destinasi_terdekat"
+            android:id="@+id/rv_destinations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:orientation="horizontal"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:clipToPadding="false"
             tools:listitem="@layout/item_destination"/>
 
     </LinearLayout>

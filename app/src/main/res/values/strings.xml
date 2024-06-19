@@ -35,7 +35,7 @@
     <string name="jelajahi_indonesia_dengan_wanderlust">Jelajahi Indonesia dengan Wanderlust.</string>
     <string name="buat_rencana">Buat Rencana</string>
     <string name="tulisan_banner">Rencanakan perjalanan \n Anda sekarang</string>
-    <string name="halo_nama">Halo, Nama!</string>
+    <string name="halo_nama">Halo, %1$s!</string>
     <string name="taman">Taman</string>
     <string name="perairan">Perairan</string>
     <string name="hutan">Hutan</string>
@@ -52,4 +52,10 @@
     <string name="destination">Destinasi</string>
     <string name="no_result">Maaf, hasil pencarian tidak ditemukan.</string>
     <string name="topDestination">Destinasi Populer</string>
+    <string name="budaya">Budaya</string>
+    <string name="taman_hiburan">Taman\nHiburan</string>
+    <string name="cagar_alam">Cagar\nAlam</string>
+    <string name="bahari">Bahari</string>
+    <string name="pusat_perbelanjaan">Pusat\nPerbelanjaan</string>
+    <string name="tempat_ibadah">Tempat\nIbadah</string>
 </resources>

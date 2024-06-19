@@ -4,10 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.addTextChangedListener
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.wanderlust.R
 import com.dicoding.wanderlust.data.ResultState
 import com.dicoding.wanderlust.databinding.ActivitySearchBinding
 import com.dicoding.wanderlust.remote.response.DataItem
@@ -29,11 +31,20 @@ class SearchActivity : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupToolbar()
         setupRecyclerView()
         setupObservers()
         setupSearch()
 
-        viewModel.getDestinations()
+        binding.searchView.requestFocus()
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -43,7 +54,9 @@ class SearchActivity : AppCompatActivity() {
         binding.rvDestination.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = destinationAdapter
+            visibility = View.GONE
         }
+        binding.tvNoResults.visibility = View.GONE
     }
 
     private fun setupObservers() {
@@ -56,12 +69,14 @@ class SearchActivity : AppCompatActivity() {
                     showLoading(false)
                     result.data.let {
                         destinationAdapter.submitList(it)
+                        binding.rvDestination.visibility = if (it.isEmpty()) View.GONE else View.VISIBLE
                         binding.tvNoResults.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
                     }
                 }
                 is ResultState.Error -> {
                     showLoading(false)
                     Log.e("DestinationActivity", "Error loading data: ${result.error}")
+                    binding.rvDestination.visibility = View.GONE
                     binding.tvNoResults.visibility = View.VISIBLE
                 }
             }
@@ -69,13 +84,35 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun setupSearch() {
-        binding.searchBar.addTextChangedListener { text ->
-            val keyword = text.toString().toLowerCase(Locale.ROOT)
-            if (keyword.isNotEmpty()) {
-                viewModel.searchDestinations(keyword)
-            } else {
-                viewModel.getDestinations()
+        val searchView = findViewById<SearchView>(R.id.searchView)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    viewModel.searchDestinations(it.toLowerCase(Locale.ROOT))
+                }
+                return true
             }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    if (it.isNotEmpty()) {
+                        viewModel.searchDestinations(it.toLowerCase(Locale.ROOT))
+                    } else {
+                        destinationAdapter.submitList(emptyList())
+                        binding.rvDestination.visibility = View.GONE
+                        binding.tvNoResults.visibility = View.GONE
+                    }
+                }
+                return true
+            }
+        })
+
+        val closeButton = searchView.findViewById<ImageView>(androidx.appcompat.R.id.search_close_btn)
+        closeButton.setOnClickListener {
+            searchView.setQuery("", false)
+            destinationAdapter.submitList(emptyList())
+            binding.rvDestination.visibility = View.GONE
+            binding.tvNoResults.visibility = View.GONE
         }
     }
 
@@ -94,3 +131,5 @@ class SearchActivity : AppCompatActivity() {
         startActivity(intent)
     }
 }
+
+
