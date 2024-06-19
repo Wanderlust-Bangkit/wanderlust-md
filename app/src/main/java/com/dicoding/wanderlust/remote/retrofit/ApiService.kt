@@ -1,10 +1,13 @@
 package com.dicoding.wanderlust.remote.retrofit
 
 import com.dicoding.wanderlust.remote.response.CommonResponse
+import com.dicoding.wanderlust.remote.response.DestinationResponse
 import com.dicoding.wanderlust.remote.response.LoginResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -22,5 +25,18 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ): LoginResponse
+
+    @GET("destination")
+    suspend fun getAllDestinations(): DestinationResponse
+
+    @GET("search/{keyword}")
+    suspend fun findDestination(
+        @Path("keyword") keyword: String
+    ): DestinationResponse
+
+    @GET("destination/{category}")
+    suspend fun getDestinationByCategory(
+        @Path("category") category: String
+    ): DestinationResponse
 
 }

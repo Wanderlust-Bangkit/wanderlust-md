@@ -4,6 +4,7 @@ import com.dicoding.wanderlust.data.ResultState
 import com.dicoding.wanderlust.data.model.UserModel
 import com.dicoding.wanderlust.data.pref.UserPreference
 import com.dicoding.wanderlust.remote.response.CommonResponse
+import com.dicoding.wanderlust.remote.response.DestinationResponse
 import com.dicoding.wanderlust.remote.response.LoginResponse
 import com.dicoding.wanderlust.remote.retrofit.ApiService
 import com.google.gson.Gson
@@ -66,6 +67,19 @@ class Repository private constructor(
 
     suspend fun logout() {
         userPreference.logout()
+    }
+
+    suspend fun getAllDestinations(): DestinationResponse {
+        return apiService.getAllDestinations()
+    }
+
+    suspend fun findDestination(keyword: String): DestinationResponse {
+        if (keyword.isEmpty()){ getAllDestinations() }
+        return apiService.findDestination(keyword)
+    }
+
+    suspend fun getDestinationByCategory(category: String): DestinationResponse {
+        return apiService.findDestination(category)
     }
 
     companion object {

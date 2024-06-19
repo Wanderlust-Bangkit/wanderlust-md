@@ -18,4 +18,8 @@ class DestinationDetailActivity : AppCompatActivity() {
             insets
         }
     }
+
+    companion object {
+        const val EXTRA_DESTINATION = "extra_destination"
+    }
 }
