@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.wanderlust.data.di.Injection
 import com.dicoding.wanderlust.repository.Repository
+import com.dicoding.wanderlust.ui.destination.DestinationViewModel
 import com.dicoding.wanderlust.ui.home.HomeViewModel
 import com.dicoding.wanderlust.ui.itinerary.ItineraryViewModel
 import com.dicoding.wanderlust.ui.login.LoginViewModel
@@ -34,6 +35,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             }
             modelClass.isAssignableFrom(ItineraryViewModel::class.java) -> {
                 ItineraryViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(DestinationViewModel::class.java) -> {
+                DestinationViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

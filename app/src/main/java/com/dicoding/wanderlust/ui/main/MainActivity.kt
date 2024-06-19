@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.dicoding.wanderlust.R
 import com.dicoding.wanderlust.databinding.ActivityMainBinding
@@ -23,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -40,12 +38,9 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        setupActionBarWithNavController(navController)
         navView.setupWithNavController(navController)
 
-        // Navigate to home destination
         navController.navigate(R.id.navigation_home)
-        navController.navigate(R.id.navigation_profile)
     }
 
     private fun navigateToRegister() {

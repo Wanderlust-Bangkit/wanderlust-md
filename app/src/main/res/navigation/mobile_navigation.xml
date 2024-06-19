@@ -14,12 +14,12 @@
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.dicoding.wanderlust.ui.itinerary.ItineraryFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/itinerary"
         tools:layout="@layout/fragment_itinerary" />
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.dicoding.wanderlust.ui.profile.ProfileFragment"
-        android:label="Profile"
+        android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

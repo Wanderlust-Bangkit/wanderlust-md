@@ -41,11 +41,11 @@
                 android:paddingEnd="16dp"
                 android:textColor="@android:color/white"/>
 
-            <!-- Search Bar -->
             <EditText
                 android:id="@+id/search_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:hint="@string/searchbar_hint"
                 android:background="#F3F3F3"
                 android:padding="12dp"
@@ -304,18 +304,18 @@
 
         <!-- Destinasi yang mungkin kamu sukai Section -->
         <TextView
-            android:id="@+id/tv_destinasi_suka"
+            android:id="@+id/tvTopDestination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/destinasi_yang_mungkin_kamu_sukai"
+            android:text="@string/topDestination"
             android:textSize="18sp"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_destinasi_suka"
+            android:id="@+id/rvTopRatedDestinations"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

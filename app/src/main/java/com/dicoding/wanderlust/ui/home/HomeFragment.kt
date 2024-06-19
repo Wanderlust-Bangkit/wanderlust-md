@@ -1,20 +1,32 @@
 package com.dicoding.wanderlust.ui.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.wanderlust.R
+import com.dicoding.wanderlust.data.ResultState
 import com.dicoding.wanderlust.databinding.FragmentHomeBinding
+import com.dicoding.wanderlust.remote.response.DataItem
 import com.dicoding.wanderlust.ui.ViewModelFactory
+import com.dicoding.wanderlust.ui.adapter.DestinationAdapter
+import com.dicoding.wanderlust.ui.destination.DestinationCategoryActivity
+import com.dicoding.wanderlust.ui.destination.DestinationDetailActivity
+import com.dicoding.wanderlust.ui.destination.SearchActivity
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
+    private lateinit var destinationAdapter: DestinationAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,21 +36,79 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val factory = ViewModelFactory.getInstance(requireContext())
-        homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
-
-        // Setup RecyclerView
+        setupSearchBar()
+        setupCategoryClickListeners()
         setupRecyclerView()
+        observeViewModel()
 
         return root
     }
 
-    private fun setupRecyclerView() {
-        val layoutManagerSuka = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvDestinasiSuka.layoutManager = layoutManagerSuka
+    private fun setupSearchBar() {
+        binding.searchBar.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                val intent = Intent(requireContext(), SearchActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
 
-        val layoutManagerTerdekat = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvDestinasiTerdekat.layoutManager = layoutManagerTerdekat
+    private fun setupCategoryClickListeners() {
+        binding.categoryContainer1.setOnClickListener {
+            openCategoryActivity(getString(R.string.gunung))
+        }
+        binding.categoryContainer2.setOnClickListener {
+            openCategoryActivity(getString(R.string.pantai))
+        }
+        binding.categoryContainer3.setOnClickListener {
+            openCategoryActivity(getString(R.string.hutan))
+        }
+        binding.categoryContainer4.setOnClickListener {
+            openCategoryActivity(getString(R.string.taman))
+        }
+        binding.categoryContainer5.setOnClickListener {
+            openCategoryActivity(getString(R.string.perairan))
+        }
+    }
+
+    private fun openCategoryActivity(category: String) {
+        val intent = Intent(requireContext(), DestinationCategoryActivity::class.java).apply {
+            putExtra(DestinationCategoryActivity.EXTRA_CATEGORY, category)
+        }
+        startActivity(intent)
+    }
+
+    private fun setupRecyclerView() {
+        destinationAdapter = DestinationAdapter { dataItem ->
+            onDataItemClicked(dataItem)
+        }
+        binding.rvTopRatedDestinations.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = destinationAdapter
+        }
+    }
+
+    private fun observeViewModel() {
+        homeViewModel.topRatedDestinations.observe(viewLifecycleOwner) { resultState ->
+            when (resultState) {
+                is ResultState.Loading -> {
+                    // Nothing to do
+                }
+                is ResultState.Success -> {
+                    destinationAdapter.submitList(resultState.data)
+                }
+                is ResultState.Error -> {
+                    Log.e("DestinationActivity", "Error loading data: ${resultState.error}")
+                }
+            }
+        }
+    }
+
+    private fun onDataItemClicked(dataItem: DataItem) {
+        val intent = Intent(requireContext(), DestinationDetailActivity::class.java).apply {
+            putExtra(DestinationDetailActivity.EXTRA_DESTINATION, dataItem)
+        }
+        startActivity(intent)
     }
 
     override fun onDestroyView() {
@@ -46,3 +116,7 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
+
+
+
+
