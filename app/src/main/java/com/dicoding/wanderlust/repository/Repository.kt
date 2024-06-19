@@ -79,7 +79,7 @@ class Repository private constructor(
     }
 
     suspend fun getDestinationByCategory(category: String): DestinationResponse {
-        return apiService.findDestination(category)
+        return apiService.getDestinationByCategory(category)
     }
 
     companion object {

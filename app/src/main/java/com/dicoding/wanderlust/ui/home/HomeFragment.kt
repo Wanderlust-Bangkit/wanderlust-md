@@ -55,19 +55,22 @@ class HomeFragment : Fragment() {
 
     private fun setupCategoryClickListeners() {
         binding.categoryContainer1.setOnClickListener {
-            openCategoryActivity(getString(R.string.gunung))
+            openCategoryActivity("Budaya")
         }
         binding.categoryContainer2.setOnClickListener {
-            openCategoryActivity(getString(R.string.pantai))
+            openCategoryActivity("Taman Hiburan")
         }
         binding.categoryContainer3.setOnClickListener {
-            openCategoryActivity(getString(R.string.hutan))
+            openCategoryActivity("Cagar Alam")
         }
         binding.categoryContainer4.setOnClickListener {
-            openCategoryActivity(getString(R.string.taman))
+            openCategoryActivity("Bahari")
         }
         binding.categoryContainer5.setOnClickListener {
-            openCategoryActivity(getString(R.string.perairan))
+            openCategoryActivity("Pusat Perbelanjaan")
+        }
+        binding.categoryContainer6.setOnClickListener {
+            openCategoryActivity("Tempat Ibadah")
         }
     }
 
@@ -102,6 +105,10 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+
+        homeViewModel.userName.observe(viewLifecycleOwner) { userName ->
+            binding.tvWelcome.text = getString(R.string.halo_nama, userName)
+        }
     }
 
     private fun onDataItemClicked(dataItem: DataItem) {
@@ -116,6 +123,7 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
+
 
 
 

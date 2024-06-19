@@ -14,8 +14,12 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     private val _topRatedDestinations = MutableLiveData<ResultState<List<DataItem>>>()
     val topRatedDestinations: LiveData<ResultState<List<DataItem>>> = _topRatedDestinations
 
+    private val _userName = MutableLiveData<String>()
+    val userName: LiveData<String> = _userName
+
     init {
         getTopRatedDestinations()
+        getUserName()
     }
 
     private fun getTopRatedDestinations() {
@@ -28,6 +32,14 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
                 _topRatedDestinations.postValue(ResultState.Success(topRated))
             } catch (e: Exception) {
                 _topRatedDestinations.postValue(ResultState.Error(e.toString()))
+            }
+        }
+    }
+
+    private fun getUserName() {
+        viewModelScope.launch {
+            repository.getSession().collect { user ->
+                _userName.postValue(user.name)
             }
         }
     }

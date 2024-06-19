@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_itinerary"
         android:name="com.dicoding.wanderlust.ui.itinerary.ItineraryFragment"
         android:label="@string/itinerary"
         tools:layout="@layout/fragment_itinerary" />

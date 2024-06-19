@@ -39,4 +39,19 @@ interface ApiService {
         @Path("category") category: String
     ): DestinationResponse
 
+    @POST("addFavorit")
+    suspend fun addFavorite(
+        @Field("destinationId") destinationId: String
+    ): CommonResponse
+
+    @POST("deleteFavorit")
+    suspend fun deleteFavorite(
+        @Field("destinationId") destinationId: String
+    ): CommonResponse
+
+    @GET("favorit/{userId}")
+    suspend fun getAllFavorites(
+        @Path("userId") userId: String
+    ): DestinationResponse
+
 }
