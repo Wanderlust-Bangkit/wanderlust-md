@@ -1,0 +1,16 @@
+<!-- styles.xml -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Custom style for the Batal button -->
+    <style name="Button.Batal" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@drawable/rounded_button_secondary</item>
+        <!-- Add any other custom attributes as needed -->
+    </style>
+
+    <!-- Custom style for the Keluar button -->
+    <style name="Button.Keluar" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@drawable/rounded_button</item>
+        <!-- Add any other custom attributes as needed -->
+    </style>
+
+</resources>
