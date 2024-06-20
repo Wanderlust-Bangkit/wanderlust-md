@@ -1,47 +1,50 @@
 package com.dicoding.wanderlust.ui.boarding
 
-import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import com.dicoding.wanderlust.R
-import com.dicoding.wanderlust.databinding.ActivitySplashScreenBinding
-import com.dicoding.wanderlust.ui.ViewModelFactory
+import com.dicoding.wanderlust.ui.boarding.BoardingActivity
 import com.dicoding.wanderlust.ui.main.MainActivity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-
-import android.view.animation.AnimationUtils
+import kotlinx.coroutines.*
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivitySplashScreenBinding
     private val activityScope = CoroutineScope(Dispatchers.Main)
+
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_splash_screen)
 
-        // Optional: You can set a timeout for how long the splash screen will be shown
-        val splashTimeoutMillis: Long = 2000 // 2 seconds
-
-        // Load animation
-        val animation = AnimationUtils.loadAnimation(this, R.anim.text_animation)
-        binding.textViewAppName.startAnimation(animation)
+        sharedPreferences = getSharedPreferences("com.dicoding.wanderlust.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE)
 
         activityScope.launch {
-            delay(splashTimeoutMillis)
+            delay(2000) // Splash screen delay
+            checkFirstLaunch()
+        }
+    }
+
+    private fun checkFirstLaunch() {
+        val isFirstLaunch = sharedPreferences.getBoolean("isFirstLaunch", true)
+
+        if (isFirstLaunch) {
+            // First time launch, go to BoardingActivity
+            sharedPreferences.edit().putBoolean("isFirstLaunch", false).apply()
+            navigateToBoarding()
+        } else {
+            // Not the first time launch, go to MainActivity
             navigateToMain()
         }
+    }
+
+    private fun navigateToBoarding() {
+        val intent = Intent(this@SplashScreenActivity, BoardingActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun navigateToMain() {
