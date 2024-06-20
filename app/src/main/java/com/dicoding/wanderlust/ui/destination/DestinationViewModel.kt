@@ -8,8 +8,13 @@ import androidx.lifecycle.viewModelScope
 import com.dicoding.wanderlust.data.ResultState
 import com.dicoding.wanderlust.remote.response.CommonResponse
 import com.dicoding.wanderlust.remote.response.DataItem
+import com.dicoding.wanderlust.remote.response.DestinationResponse
 import com.dicoding.wanderlust.repository.Repository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import java.lang.Exception
 import kotlinx.coroutines.launch
 
 class DestinationViewModel(private val repository: Repository) : ViewModel() {
@@ -104,6 +109,15 @@ class DestinationViewModel(private val repository: Repository) : ViewModel() {
     fun isFavorite(): Boolean {
         return false
     }
+    fun getNearestDestinations(latitude: Double, longitude: Double): Flow<ResultState<DestinationResponse>> = flow {
+        emit(ResultState.Loading)
+        try {
+            val response = repository.getNearestDestinations(latitude, longitude)
+            emit(ResultState.Success(response))
+        } catch (exc: Exception) {
+            emit(ResultState.Error(exc.message ?: "An error occurred"))
+        }
+    }.flowOn(Dispatchers.IO)
 }
 
 
