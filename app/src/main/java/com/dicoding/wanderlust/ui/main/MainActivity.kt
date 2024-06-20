@@ -10,7 +10,7 @@ import com.dicoding.wanderlust.R
 import com.dicoding.wanderlust.databinding.ActivityMainBinding
 import com.dicoding.wanderlust.ui.ViewModelFactory
 import com.dicoding.wanderlust.ui.itinerary.ItineraryFragment
-import com.dicoding.wanderlust.ui.register.RegisterActivity
+import com.dicoding.wanderlust.ui.login.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             if (user.isLogin) {
                 setupNavigation()
             } else {
-                navigateToRegister()
+                navigateToLogin()
             }
         }
     }
@@ -44,8 +44,8 @@ class MainActivity : AppCompatActivity() {
         navController.navigate(R.id.navigation_home)
     }
 
-    private fun navigateToRegister() {
-        startActivity(Intent(this, RegisterActivity::class.java))
+    private fun navigateToLogin() {
+        startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
 

@@ -57,7 +57,7 @@ class Repository private constructor(
             }
         } catch (exc: HttpException) {
             val errorBody = exc.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, LoginResponse::class.java)
+            val errorResponse = Gson().fromJson<LoginResponse>(errorBody, LoginResponse::class.java)
             emit(ResultState.Error(errorResponse.message.toString()))
         }
     }.flowOn(Dispatchers.IO)
@@ -108,14 +108,14 @@ class Repository private constructor(
             }
         } catch (exc: HttpException) {
             val errorBody = exc.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, CommonResponse::class.java)
+            val errorResponse = Gson().fromJson<CommonResponse>(errorBody, CommonResponse::class.java)
             emit(ResultState.Error(errorResponse.message.toString()))
         }
     }.flowOn(Dispatchers.IO)
 
     fun deleteFavorite(userId: String, destinationId: String): Flow<ResultState<CommonResponse>> = flow {
         try {
-            val response = apiService.deleteFavorite(userId,destinationId)
+            val response = apiService.deleteFavorite(userId, destinationId)
             if (response.error == true) {
                 emit(ResultState.Error(response.message.toString()))
             } else {
@@ -123,13 +123,41 @@ class Repository private constructor(
             }
         } catch (exc: HttpException) {
             val errorBody = exc.response()?.errorBody()?.string()
-            val errorResponse = Gson().fromJson(errorBody, CommonResponse::class.java)
+            val errorResponse = Gson().fromJson<CommonResponse>(errorBody, CommonResponse::class.java)
             emit(ResultState.Error(errorResponse.message.toString()))
         }
     }.flowOn(Dispatchers.IO)
 
+    suspend fun getNearestDestinations(latitude: Double, longitude: Double): DestinationResponse {
+        val allDestinations = getAllDestinations().data ?: emptyList()
+
+        // Calculate distances and sort by nearest
+        val nearestDestinations = allDestinations.mapNotNull { dataItem ->
+            dataItem?.let {
+                val distance = calculateDistance(latitude, longitude, it.lat ?: 0.0, it.lon ?: 0.0)
+                Pair(it, distance)
+            }
+        }.sortedBy { it.second } // Sort by distance ascending
+
+        return DestinationResponse(
+            data = nearestDestinations.map { it.first },
+            error = false
+        )
+    }
+
+    private fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
+        val radius = 6371 // Earth radius in kilometers
+        val dLat = Math.toRadians(lat2 - lat1)
+        val dLon = Math.toRadians(lon2 - lon1)
+        val a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                Math.sin(dLon / 2) * Math.sin(dLon / 2)
+        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+        return radius * c // Distance in kilometers
+    }
+
     suspend fun getAllItineraries(userId: String): ItineraryResponse {
-         return apiService.getAllItineraries(userId)
+        return apiService.getAllItineraries(userId)
     }
 
     suspend fun generateItinerary(category: String, location: String): DestinationResponse {

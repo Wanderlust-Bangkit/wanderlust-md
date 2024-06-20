@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.wanderlust.databinding.ItemDestinationBinding
 import com.dicoding.wanderlust.remote.response.DataItem
+import kotlin.math.min
 
 class DestinationAdapter(private val onItemClick: (DataItem) -> Unit) :
     ListAdapter<DataItem, DestinationAdapter.MyViewHolder>(DIFF_CALLBACK) {
@@ -25,7 +26,12 @@ class DestinationAdapter(private val onItemClick: (DataItem) -> Unit) :
         }
     }
 
-    class MyViewHolder(private val binding: ItemDestinationBinding) :
+    override fun getItemCount(): Int {
+        // Ensure only top 8 nearest destinations are displayed
+        return min(super.getItemCount(), 8)
+    }
+
+    inner class MyViewHolder(private val binding: ItemDestinationBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(destination: DataItem) {
             binding.apply {
@@ -37,6 +43,9 @@ class DestinationAdapter(private val onItemClick: (DataItem) -> Unit) :
                 }
                 tvLokasiDestinasi.text = destination.city
 
+                itemView.setOnClickListener {
+                    onItemClick(destination)
+                }
             }
         }
     }
@@ -53,4 +62,3 @@ class DestinationAdapter(private val onItemClick: (DataItem) -> Unit) :
         }
     }
 }
-

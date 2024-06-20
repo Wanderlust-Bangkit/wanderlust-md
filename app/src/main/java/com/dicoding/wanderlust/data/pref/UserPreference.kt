@@ -50,6 +50,7 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
         private val NAME_KEY = stringPreferencesKey("name")
         private val USER_ID = stringPreferencesKey("userId")
         private val TOKEN_KEY = stringPreferencesKey("token")
+        private val REFRESH_TOKEN_KEY = stringPreferencesKey("refreshToken")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
 
         fun getInstance(dataStore: DataStore<androidx.datastore.preferences.core.Preferences>): UserPreference {
