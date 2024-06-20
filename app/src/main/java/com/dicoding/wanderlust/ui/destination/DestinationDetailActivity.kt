@@ -32,6 +32,7 @@ class DestinationDetailActivity : AppCompatActivity() {
         if (dataItem != null) {
             currentDataItem = dataItem
             showDetail(dataItem)
+            dataItem.id?.let { viewModel.checkIfFavorite(it) } // Panggil fungsi checkIfFavorite()
         }
 
         binding.fabFavorite.setOnClickListener {
@@ -81,11 +82,7 @@ class DestinationDetailActivity : AppCompatActivity() {
         viewModel.favoriteResult.observe(this) { result ->
             when (result) {
                 is ResultState.Success -> {
-                    if (viewModel.isFavorite()) {
-                        binding.fabFavorite.setImageResource(R.drawable.ic_favorite)
-                    } else {
-                        binding.fabFavorite.setImageResource(R.drawable.ic_favorite_border)
-                    }
+                    // Do nothing, as the favorite status is already handled by isFavorite observer
                 }
 
                 is ResultState.Error -> {
@@ -97,10 +94,19 @@ class DestinationDetailActivity : AppCompatActivity() {
                 }
             }
         }
+
+        viewModel.isFavorite.observe(this) { isFavorite ->
+            if (isFavorite) {
+                binding.fabFavorite.setImageResource(R.drawable.ic_favorite)
+            } else {
+                binding.fabFavorite.setImageResource(R.drawable.ic_favorite_border)
+            }
+        }
     }
 
     companion object {
         const val EXTRA_DESTINATION = "extra_destination"
     }
 }
+
 

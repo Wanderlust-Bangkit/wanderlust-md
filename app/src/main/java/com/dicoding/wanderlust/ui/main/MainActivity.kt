@@ -9,6 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.dicoding.wanderlust.R
 import com.dicoding.wanderlust.databinding.ActivityMainBinding
 import com.dicoding.wanderlust.ui.ViewModelFactory
+import com.dicoding.wanderlust.ui.itinerary.ItineraryFragment
 import com.dicoding.wanderlust.ui.register.RegisterActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -46,6 +47,14 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToRegister() {
         startActivity(Intent(this, RegisterActivity::class.java))
         finish()
+    }
+
+    fun navigateToItineraryFragment() {
+        val itineraryFragment = ItineraryFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment_activity_main, itineraryFragment)
+            .addToBackStack(null)
+            .commit()
     }
 
 }

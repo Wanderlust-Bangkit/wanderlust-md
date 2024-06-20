@@ -1,76 +1,110 @@
 package com.dicoding.wanderlust.ui.itinerary
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CalendarView
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.ScrollView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.dicoding.wanderlust.R
+import androidx.fragment.app.viewModels
+import com.dicoding.wanderlust.data.ResultState
+import com.dicoding.wanderlust.databinding.FragmentItineraryBinding
+import com.dicoding.wanderlust.remote.response.ItineraryItem
+import com.dicoding.wanderlust.ui.ViewModelFactory
+import com.dicoding.wanderlust.ui.adapter.ItineraryAdapter
 
 class ItineraryFragment : Fragment() {
 
-    private lateinit var itineraryViewModel: ItineraryViewModel
-    private lateinit var etName: EditText
-    private lateinit var lvDestinations: ListView
-    private lateinit var btnStartDate: Button
-    private lateinit var btnEndDate: Button
-    private lateinit var calendarView: CalendarView
-    private lateinit var formScrollView: ScrollView
+    private var _binding: FragmentItineraryBinding? = null
+    private val binding get() = _binding!!
+
+    private val itineraryViewModel: ItineraryViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
+
+    private lateinit var itineraryAdapter: ItineraryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_itinerary, container, false)
-
-        itineraryViewModel = ViewModelProvider(this)[ItineraryViewModel::class.java]
-
-//        etName = rootView.findViewById(R.id.etName)
-//        lvDestinations = rootView.findViewById(R.id.lvDestinations)
-//        btnStartDate = rootView.findViewById(R.id.btnStartDate)
-//        btnEndDate = rootView.findViewById(R.id.btnEndDate)
-//        calendarView = rootView.findViewById(R.id.calendarView)
-//        formScrollView = rootView.findViewById(R.id.formScrollView)
-//
-//        rootView.findViewById<Button>(R.id.btnToggleDestinations).setOnClickListener {
-//            toggleListViewVisibility()
-//        }
-
-        lvDestinations.setOnItemClickListener { _, _, _, _ ->
-            // Handle destination selection
-            lvDestinations.visibility = View.GONE
-        }
-
-        btnStartDate.setOnClickListener {
-            calendarView.visibility = View.VISIBLE
-            calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-                btnStartDate.text = "$dayOfMonth/${month + 1}/$year"
-                calendarView.visibility = View.GONE
-            }
-        }
-
-        btnEndDate.setOnClickListener {
-            calendarView.visibility = View.VISIBLE
-            calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-                btnEndDate.text = "$dayOfMonth/${month + 1}/$year"
-                calendarView.visibility = View.GONE
-            }
-        }
-
-        return rootView
+    ): View {
+        _binding = FragmentItineraryBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    private fun toggleListViewVisibility() {
-        lvDestinations.visibility = if (lvDestinations.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setupRecyclerView()
+        observeViewModel()
+
+        binding.fabAdd.setOnClickListener {
+            val intent = Intent(activity, AddItineraryActivity::class.java)
+            startActivity(intent)
+        }
     }
 
-    fun onThemeSelected(view: View) {
-        formScrollView.visibility = View.VISIBLE
+    private fun setupRecyclerView() {
+        itineraryAdapter = ItineraryAdapter { itineraryItem ->
+            onDataItemClicked(itineraryItem)
+        }
+        binding.rvItinerary.apply {
+            adapter = itineraryAdapter
+            setHasFixedSize(true)
+        }
+    }
+
+    private fun onDataItemClicked(itineraryItem: ItineraryItem) {
+        val intent = Intent(requireContext(), ItineraryDetailActivity::class.java).apply {
+            putExtra(ItineraryDetailActivity.EXTRA_ITINERARY, itineraryItem)
+        }
+        startActivity(intent)
+    }
+
+    private fun observeViewModel() {
+        itineraryViewModel.itineraryList.observe(viewLifecycleOwner) { resultState ->
+            Log.d("ItineraryFragment", "Observe ViewModel: $resultState")
+            when (resultState) {
+                is ResultState.Loading -> {
+                    Log.d("ItineraryFragment", "Loading state")
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.rvItinerary.visibility = View.GONE
+                    binding.imgNoIllustration.visibility = View.GONE
+                    binding.tvNoResults.visibility = View.GONE
+                }
+                is ResultState.Success -> {
+                    Log.d("ItineraryFragment", "Success state with data: ${resultState.data}")
+                    binding.progressBar.visibility = View.GONE
+                    val itineraries = resultState.data
+                    if (itineraries.isEmpty()) {
+                        Log.d("ItineraryFragment", "No itineraries found")
+                        binding.rvItinerary.visibility = View.GONE
+                        binding.imgNoIllustration.visibility = View.VISIBLE
+                        binding.tvNoResults.visibility = View.VISIBLE
+                    } else {
+                        binding.rvItinerary.visibility = View.VISIBLE
+                        binding.imgNoIllustration.visibility = View.GONE
+                        binding.tvNoResults.visibility = View.GONE
+                        itineraryAdapter.submitList(itineraries)
+
+                        Log.d("ItineraryList", "Number of itineraries: ${itineraries.size}")
+                    }
+                }
+                is ResultState.Error -> {
+                    Log.e("ItineraryFragment", "Error state with message: ${resultState.error}")
+                    binding.progressBar.visibility = View.GONE
+                    binding.rvItinerary.visibility = View.GONE
+                    binding.imgNoIllustration.visibility = View.VISIBLE
+                    binding.tvNoResults.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
+

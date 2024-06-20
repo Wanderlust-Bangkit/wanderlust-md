@@ -78,7 +78,6 @@ class LoginActivity : AppCompatActivity() {
                                     sessionData.loginResult?.email ?: "",
                                     sessionData.loginResult?.userId ?: "",
                                     sessionData.loginResult?.token ?: "",
-                                    "",
                                     true
                                 )
                             )

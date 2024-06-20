@@ -31,7 +31,6 @@ class UserPreference private constructor(private val dataStore: DataStore<androi
                 preferences[NAME_KEY] ?: "",
                 preferences[USER_ID] ?: "",
                 preferences[TOKEN_KEY] ?: "",
-                "",
                 preferences[IS_LOGIN_KEY] ?: false
             )
         }

@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class DestinationResponse(
 
 	@field:SerializedName("data")
-	val data: List<DataItem?>? = null,
+	val data: List<DataItem>? = null,
 
 	@field:SerializedName("error")
 	val error: Boolean? = null

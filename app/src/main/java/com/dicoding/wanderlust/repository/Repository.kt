@@ -5,7 +5,9 @@ import com.dicoding.wanderlust.data.model.UserModel
 import com.dicoding.wanderlust.data.pref.UserPreference
 import com.dicoding.wanderlust.remote.response.CommonResponse
 import com.dicoding.wanderlust.remote.response.DestinationResponse
+import com.dicoding.wanderlust.remote.response.ItineraryResponse
 import com.dicoding.wanderlust.remote.response.LoginResponse
+import com.dicoding.wanderlust.remote.response.PlanItem
 import com.dicoding.wanderlust.remote.retrofit.ApiService
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +20,6 @@ class Repository private constructor(
     private val apiService: ApiService,
     private val userPreference: UserPreference
 ) {
-
     fun register(name: String, email: String, password: String): Flow<ResultState<CommonResponse>> = flow {
         emit(ResultState.Loading)
         try {
@@ -48,7 +49,6 @@ class Repository private constructor(
                         loginResult.name ?: "",
                         loginResult.userId ?: "",
                         loginResult.token ?: "",
-                        "",
                         true
                     )
                     saveSession(user)
@@ -80,7 +80,7 @@ class Repository private constructor(
 
     suspend fun findDestination(keyword: String): DestinationResponse {
         if (keyword.isEmpty()) {
-            getAllDestinations()
+            return getAllDestinations()
         }
         return apiService.findDestination(keyword)
     }
@@ -93,9 +93,14 @@ class Repository private constructor(
         return apiService.getAllFavorites(userId)
     }
 
-    fun addFavorite(destinationId: String): Flow<ResultState<CommonResponse>> = flow {
+    suspend fun isFavorite(userId: String, destinationId: String): Boolean {
+        val response = getAllFavorites(userId)
+        return response.data?.any { it?.id == destinationId } ?: false
+    }
+
+    fun addFavorite(userId: String, destinationId: String): Flow<ResultState<CommonResponse>> = flow {
         try {
-            val response = apiService.addFavorite(destinationId)
+            val response = apiService.addFavorite(userId, destinationId)
             if (response.error == true) {
                 emit(ResultState.Error(response.message.toString()))
             } else {
@@ -108,9 +113,9 @@ class Repository private constructor(
         }
     }.flowOn(Dispatchers.IO)
 
-    fun deleteFavorite(destinationId: String): Flow<ResultState<CommonResponse>> = flow {
+    fun deleteFavorite(userId: String, destinationId: String): Flow<ResultState<CommonResponse>> = flow {
         try {
-            val response = apiService.deleteFavorite(destinationId)
+            val response = apiService.deleteFavorite(userId,destinationId)
             if (response.error == true) {
                 emit(ResultState.Error(response.message.toString()))
             } else {
@@ -122,6 +127,25 @@ class Repository private constructor(
             emit(ResultState.Error(errorResponse.message.toString()))
         }
     }.flowOn(Dispatchers.IO)
+
+    suspend fun getAllItineraries(userId: String): ItineraryResponse {
+         return apiService.getAllItineraries(userId)
+    }
+
+    suspend fun generateItinerary(category: String, location: String): DestinationResponse {
+        return apiService.generateItinerary(category, location)
+    }
+
+    suspend fun createItinerary(
+        name: String,
+        location: String,
+        startDate: String,
+        endDate: String,
+        userId: String,
+        planItems: List<PlanItem>
+    ): CommonResponse {
+        return apiService.createItinerary(name, location, startDate, endDate, userId, planItems)
+    }
 
     companion object {
         @Volatile

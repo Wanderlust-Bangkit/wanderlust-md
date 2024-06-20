@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pilih Tujuan"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:paddingBottom="16dp"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupDestinations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_jakarta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jakarta"/>
+
+        <RadioButton
+            android:id="@+id/rb_bogor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bogor"/>
+
+        <RadioButton
+            android:id="@+id/rb_bandung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bandung"/>
+
+        <RadioButton
+            android:id="@+id/rb_malang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Malang"/>
+
+        <RadioButton
+            android:id="@+id/rb_bali"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bali"/>
+
+        <RadioButton
+            android:id="@+id/rb_yogyakarta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yogyakarta"/>
+
+        <RadioButton
+            android:id="@+id/rb_solo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Solo"/>
+
+        <RadioButton
+            android:id="@+id/rb_semarang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Semarang"/>
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:text="Batal"
+            android:textColor="?attr/colorPrimary"/>
+
+        <Button
+            android:id="@+id/btn_select"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:text="Pilih"
+            android:textColor="@android:color/white"
+            android:layout_marginStart="16dp"/>
+    </LinearLayout>
+</LinearLayout>
