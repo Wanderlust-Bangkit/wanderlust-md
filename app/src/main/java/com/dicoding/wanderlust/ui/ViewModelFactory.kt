@@ -12,6 +12,7 @@ import com.dicoding.wanderlust.ui.login.LoginViewModel
 import com.dicoding.wanderlust.ui.main.MainViewModel
 import com.dicoding.wanderlust.ui.profile.ProfileViewModel
 import com.dicoding.wanderlust.ui.register.RegisterViewModel
+import com.dicoding.wanderlust.ui.settings.SettingsViewModel
 
 class ViewModelFactory(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
 
@@ -38,6 +39,9 @@ class ViewModelFactory(private val repository: Repository) : ViewModelProvider.N
             }
             modelClass.isAssignableFrom(DestinationViewModel::class.java) -> {
                 DestinationViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(SettingsViewModel::class.java) -> {
+                SettingsViewModel(repository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

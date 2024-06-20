@@ -1,25 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_profile.xml -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ui.profile.ProfileFragment">
-    <Button
-        android:id="@+id/action_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="Logout"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+    tools:context=".ui.profile.ProfileFragment">
+
     <!-- Blue Section -->
     <View
         android:id="@+id/blueSection"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:background="#3B82F6" />
+        android:background="?attr/colorPrimary" />
 
     <!-- Profile Image -->
     <ImageView
@@ -28,7 +20,7 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
-        android:src="@drawable/ic_profile"
+        android:src="@drawable/avatar"
         android:contentDescription="@string/image"
         android:elevation="4dp" />
 
@@ -40,9 +32,7 @@
         android:layout_below="@id/profileImage"
         android:orientation="vertical"
         android:paddingTop="16dp"
-        android:gravity="center_horizontal"
-        android:background="@android:color/white">
-
+        android:gravity="center_horizontal">
 
         <!-- Profile Name -->
         <TextView
@@ -50,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Nadhira Alia"
+            android:text="@string/name"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -60,8 +50,8 @@
             android:id="@+id/profileEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="nadhiraalia@mail.com"
-            android:textColor="@android:color/darker_gray"
+            android:text="@string/email"
+            android:textColor="#777777"
             android:textSize="14sp" />
     </LinearLayout>
 
@@ -75,7 +65,16 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:contentDescription="@string/image"
+        app:tint="@android:color/white"
         android:src="@drawable/ic_settings" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/profileContainer"
+        android:layout_marginTop="16dp"
+        android:background="?attr/colorControlHighlight" />
 
     <!-- Favorite Places -->
     <LinearLayout
@@ -93,15 +92,25 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tvEmptyFavorites"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/anda_belum_memiliki_daftar_destinasi_favorit"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_destinasi_suka"
+            android:id="@+id/rvFavoriteDestination"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal"
             android:scrollbars="none"
-            tools:listitem="@layout/item_destination"/>
+            tools:listitem="@layout/item_favorite"/>
 
     </LinearLayout>
 </RelativeLayout>

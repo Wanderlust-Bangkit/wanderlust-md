@@ -34,7 +34,7 @@
     <string name="searchbar_hint">Apa yang ingin kamu cari</string>
     <string name="jelajahi_indonesia_dengan_wanderlust">Jelajahi Indonesia dengan Wanderlust.</string>
     <string name="buat_rencana">Buat Rencana</string>
-    <string name="tulisan_banner">Rencanakan perjalanan \n Anda sekarang</string>
+    <string name="tulisan_banner">Rencanakan perjalanan\nAnda sekarang</string>
     <string name="halo_nama">Halo, %1$s!</string>
     <string name="taman">Taman</string>
     <string name="perairan">Perairan</string>
@@ -42,8 +42,9 @@
     <string name="pantai">Pantai</string>
     <string name="gunung">Gunung</string>
     <string name="deskripsi">Candi Borobudur dibangun pada abad ke-8 dan ke-9 oleh dinasti Syailendra, candi ini merupakan salah satu situs warisan budaya dunia UNESCO</string>
-    <string name="deskripsi_destinasi">Deskripsi destinasi…</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="deskripsi_destinasi">Candi Borobudur dibangun pada abad ke-8 dan ke-9 oleh dinasti Syailendra, candi ini merupakan salah satu situs warisan budaya dunia UNESCO…</string>
+    <string name="share_text">Kunjungi destinasi wisata terbaik: %1$s\n\nDescription: %2$s</string>
+    <string name="share_title">Bagikan dengan</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="beranda">Beranda</string>
     <string name="itinerary">Rencana</string>
@@ -58,4 +59,21 @@
     <string name="bahari">Bahari</string>
     <string name="pusat_perbelanjaan">Pusat\nPerbelanjaan</string>
     <string name="tempat_ibadah">Tempat\nIbadah</string>
+    <string name="rating">%1$s/10.0</string>
+    <string name="Kategori">Taman Hiburan</string>
+    <string name="place_name">Taman Mini Indonesia Indah (TMII)</string>
+    <string name="location">Cipayung, Jakarta Timur, Jakarta, Indonesia</string>
+    <string name="contoh_deskripsi">Taman Mini Indonesia Indah, sering disingkat sebagai TMII, adalah taman budaya dan rekreasi yang memukau dan terletak di Jakarta, ibu kota Indonesia. Didirikan pada tahun 1975, kompleks ini meluas lebih dari 250 hektar dan memberikan kesempatan unik bagi pengunjung untuk menjelajahi beragam budaya, tradisi, dan keindahan alam Indonesia.</string>
+    <string name="lokasi_terdekat">Lokasi Terdekat</string>
+    <string name="list_lokasi_terdekat">• Pameran Budaya Indonesia\n• Seni Tradisional dan Pertunjukan\n• Teater IMAX Keong Emas\n• Museum Indonesia\n• Kegiatan Rekreasi\n• Kelezatan Kuliner\n• Upaya Konservasi\n• Simbol Persatuan</string>
+    <string name="deskripsi_judul">Deskripsi</string>
+    <string name="open_hour">Buka | %1$s</string>
+    <string name="setting">Pengaturan\n</string>
+    <string name="logout">Keluar</string>
+    <string name="bahasa_indonesia">Indonesia</string>
+    <string name="bahasa">Bahasa</string>
+    <string name="keluar">Keluar</string>
+    <string name="batal">Batal</string>
+    <string name="apakah_anda_yakin_ingin_keluar_dari_akun_anda">Apakah Anda yakin ingin keluar dari akun Anda?</string>
+    <string name="anda_belum_memiliki_daftar_destinasi_favorit">Anda belum memiliki daftar destinasi favorit.</string>
 </resources>

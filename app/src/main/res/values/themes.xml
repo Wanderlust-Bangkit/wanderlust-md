@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Wanderlust" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:fontFamily">@font/roboto</item>
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorPrimaryContainer">@color/md_theme_primaryContainer</item>
@@ -50,6 +51,7 @@
     </style>
 
     <style name="SearchViewStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:fontFamily">@font/roboto</item>
         <item name="searchIcon">@drawable/ic_search</item>
         <item name="queryBackground">@android:color/transparent</item>
         <item name="android:textColor">@android:color/black</item>
