@@ -1,390 +1,423 @@
-D<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:context=".ui.home.HomeFragment">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <!-- Welcome Message Container -->
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <!-- Welcome Message Container -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="?attr/colorPrimary"
+                android:paddingTop="24dp"
+                android:paddingBottom="8dp"
+                app:layout_collapseMode="pin">
+
+                <TextView
+                    android:id="@+id/tv_welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/halo_nama"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jelajahi_indonesia_dengan_wanderlust"
+                    android:textSize="16sp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@android:color/white"/>
+
+                <EditText
+                    android:id="@+id/search_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:hint="@string/searchbar_hint"
+                    android:background="@drawable/rounded_edittext_background"
+                    android:padding="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:drawableStart="@drawable/ic_search"
+                    android:drawablePadding="8dp"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#3B82F6"
-            android:paddingTop="24dp">
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+                <ImageView
+                    android:id="@+id/img_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/image"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/home_banner" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_plan_now"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tulisan_banner"
+                        android:textSize="18sp"
+                        android:textColor="@android:color/black"/>
+
+                    <Button
+                        android:id="@+id/btn_buat_rencana"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="24dp"
+                        android:text="@string/buat_rencana"
+                        android:background="@drawable/rounded_button"
+                        android:textColor="@android:color/white"/>
+
+                </LinearLayout>
+
+            </FrameLayout>
 
             <TextView
-                android:id="@+id/tv_welcome"
+                android:id="@+id/tv_kategori"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/halo_nama"
-                android:textSize="24sp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_medium"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"/>
+                android:text="@string/kategori"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tv_subtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/jelajahi_indonesia_dengan_wanderlust"
-                android:textSize="16sp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:textColor="@android:color/white"/>
-
-            <EditText
-                android:id="@+id/search_bar"
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:hint="@string/searchbar_hint"
-                android:background="@drawable/rounded_edittext_background"
-                android:padding="12dp"
-                android:layout_margin="16dp"
-                android:drawableStart="@drawable/ic_search"
-                android:drawablePadding="8dp"
-                android:inputType="text" />
+                android:scrollbars="none"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Add your category items here -->
+                    <!-- Category item 1 -->
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp">
+
+                        <LinearLayout
+                            android:id="@+id/category_container_1"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="#F3F3F3"
+                            android:padding="8dp"
+                            android:gravity="center"
+                            android:layout_gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:contentDescription="@string/image"
+                                android:src="@drawable/budaya"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/category_container_1"
+                            android:layout_marginTop="4dp"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/budaya"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"/>
+
+                    </RelativeLayout>
+
+                    <!-- Category item 2 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/category_container_2"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="#F3F3F3"
+                            android:padding="8dp"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:contentDescription="@string/image"
+                                android:src="@drawable/taman_hiburan" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/taman_hiburan"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"
+                            android:gravity="center"
+                            android:maxLines="2"
+                            android:layout_gravity="center_horizontal"/>
+                    </LinearLayout>
+
+
+                    <!-- Category item 3 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/category_container_3"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="#F3F3F3"
+                            android:padding="8dp"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:contentDescription="@string/image"
+                                android:src="@drawable/cagar_alam" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/cagar_alam"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"
+                            android:gravity="center"
+                            android:maxLines="2"
+                            android:layout_gravity="center_horizontal"/>
+                    </LinearLayout>
+
+                    <!-- Category item 4 -->
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp">
+
+                        <LinearLayout
+                            android:id="@+id/category_container_4"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="#F3F3F3"
+                            android:padding="8dp"
+                            android:gravity="center"
+                            android:layout_gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:contentDescription="@string/image"
+                                android:src="@drawable/bahari"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/category_container_4"
+                            android:layout_marginTop="4dp"
+                            android:layout_centerHorizontal="true"
+                            android:text="@string/bahari"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"/>
+
+                    </RelativeLayout>
+
+                    <!-- Category item 5 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/category_container_5"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="#F3F3F3"
+                            android:padding="8dp"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:contentDescription="@string/image"
+                                android:src="@drawable/pusat_perbelanjaan" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/pusat_perbelanjaan"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"
+                            android:gravity="center"
+                            android:maxLines="2"
+                            android:layout_gravity="center_horizontal"/>
+                    </LinearLayout>
+
+                    <!-- Category item 6 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/category_container_6"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="#F3F3F3"
+                            android:padding="8dp"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:contentDescription="@string/image"
+                                android:src="@drawable/tempat_ibadah" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/tempat_ibadah"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"
+                            android:gravity="center"
+                            android:maxLines="2"
+                            android:layout_gravity="center_horizontal"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/tvTopDestination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/topDestination"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTopRatedDestinations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:scrollbars="none"
+                tools:listitem="@layout/item_destination"/>
+
+            <!-- Destinasi terdekat Section -->
+            <TextView
+                android:id="@+id/tv_destinasi_terdekat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/destinasi_terdekat"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvNearestDestinations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="32dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:clipToPadding="false"
+                tools:listitem="@layout/item_destination"/>
 
         </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp">
+    </androidx.core.widget.NestedScrollView>
 
-            <ImageView
-                android:id="@+id/img_banner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/image"
-                android:scaleType="centerCrop"
-                android:src="@drawable/home_banner" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:id="@+id/tv_plan_now"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tulisan_banner"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/black"/>
-
-                <Button
-                    android:id="@+id/btn_buat_rencana"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/buat_rencana"
-                    android:backgroundTint="#3B82F6"
-                    android:textColor="@android:color/white"/>
-
-            </LinearLayout>
-
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/tv_kategori"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/kategori"
-            android:textSize="18sp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textStyle="bold"/>
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:layout_marginTop="8dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- Add your category items here -->
-                <!-- Category item 1 -->
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp">
-
-                    <LinearLayout
-                        android:id="@+id/category_container_1"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="#F3F3F3"
-                        android:padding="8dp"
-                        android:gravity="center"
-                        android:layout_gravity="center_vertical">
-
-                        <ImageView
-                            android:layout_width="34dp"
-                            android:layout_height="34dp"
-                            android:contentDescription="@string/image"
-                            android:src="@drawable/budaya"/>
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/category_container_1"
-                        android:layout_marginTop="4dp"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/budaya"
-                        android:textColor="@android:color/black"
-                        android:textSize="12sp"/>
-
-                </RelativeLayout>
-
-                <!-- Category item 2 -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginEnd="16dp"
-                    android:gravity="center_horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/category_container_2"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="#F3F3F3"
-                        android:padding="8dp"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="34dp"
-                            android:layout_height="34dp"
-                            android:contentDescription="@string/image"
-                            android:src="@drawable/taman_hiburan" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/taman_hiburan"
-                        android:textColor="@android:color/black"
-                        android:textSize="12sp"
-                        android:gravity="center"
-                        android:maxLines="2"
-                        android:layout_gravity="center_horizontal"/>
-                </LinearLayout>
-
-
-                <!-- Category item 3 -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginEnd="16dp"
-                    android:gravity="center_horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/category_container_3"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="#F3F3F3"
-                        android:padding="8dp"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="34dp"
-                            android:layout_height="34dp"
-                            android:contentDescription="@string/image"
-                            android:src="@drawable/cagar_alam" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/cagar_alam"
-                        android:textColor="@android:color/black"
-                        android:textSize="12sp"
-                        android:gravity="center"
-                        android:maxLines="2"
-                        android:layout_gravity="center_horizontal"/>
-                </LinearLayout>
-
-                <!-- Category item 4 -->
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp">
-
-                    <LinearLayout
-                        android:id="@+id/category_container_4"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="#F3F3F3"
-                        android:padding="8dp"
-                        android:gravity="center"
-                        android:layout_gravity="center_vertical">
-
-                        <ImageView
-                            android:layout_width="34dp"
-                            android:layout_height="34dp"
-                            android:contentDescription="@string/image"
-                            android:src="@drawable/bahari"/>
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/category_container_4"
-                        android:layout_marginTop="4dp"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/bahari"
-                        android:textColor="@android:color/black"
-                        android:textSize="12sp"/>
-
-                </RelativeLayout>
-
-                <!-- Category item 5 -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginEnd="16dp"
-                    android:gravity="center_horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/category_container_5"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="#F3F3F3"
-                        android:padding="8dp"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="34dp"
-                            android:layout_height="34dp"
-                            android:contentDescription="@string/image"
-                            android:src="@drawable/pusat_perbelanjaan" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/pusat_perbelanjaan"
-                        android:textColor="@android:color/black"
-                        android:textSize="12sp"
-                        android:gravity="center"
-                        android:maxLines="2"
-                        android:layout_gravity="center_horizontal"/>
-                </LinearLayout>
-
-                <!-- Category item 6 -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginEnd="16dp"
-                    android:gravity="center_horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/category_container_6"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="#F3F3F3"
-                        android:padding="8dp"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="34dp"
-                            android:layout_height="34dp"
-                            android:contentDescription="@string/image"
-                            android:src="@drawable/tempat_ibadah" />
-
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="@string/tempat_ibadah"
-                        android:textColor="@android:color/black"
-                        android:textSize="12sp"
-                        android:gravity="center"
-                        android:maxLines="2"
-                        android:layout_gravity="center_horizontal"/>
-                </LinearLayout>
-
-            </LinearLayout>
-        </HorizontalScrollView>
-
-        <TextView
-            android:id="@+id/tvTopDestination"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/topDestination"
-            android:textSize="18sp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvTopRatedDestinations"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="horizontal"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:scrollbars="none"
-            tools:listitem="@layout/item_destination"/>
-
-        <!-- Destinasi terdekat Section -->
-        <TextView
-            android:id="@+id/tv_destinasi_terdekat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/destinasi_terdekat"
-            android:textSize="18sp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:textStyle="bold"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_destinations"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:clipToPadding="false"
-            tools:listitem="@layout/item_destination"/>
-
-    </LinearLayout>
-</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -14,22 +14,24 @@
 
         <ImageView
             android:id="@+id/ivItemPhoto"
-            android:layout_width="104dp"
-            android:layout_height="103dp"
+            android:layout_width="128dp"
+            android:layout_height="0dp"
             android:contentDescription="@string/image"
             android:scaleType="centerCrop"
             android:src="@drawable/image"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintVertical_chainStyle="spread" />
 
         <TextView
             android:id="@+id/tvNamaDestinasi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto_bold"
             android:text="@string/name"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -41,11 +43,11 @@
             android:id="@+id/tvDeskripsiDestinasi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:ellipsize="end"
-            android:maxLines="2"
+            android:maxLines="3"
             android:text="@string/deskripsi_destinasi"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,14 +58,16 @@
             android:id="@+id/icLocation"
             android:layout_width="16dp"
             android:layout_height="16dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:contentDescription="@string/image"
             android:src="@drawable/ic_location"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/ivItemPhoto"
-            app:layout_constraintTop_toBottomOf="@id/tvDeskripsiDestinasi" />
+            app:layout_constraintTop_toBottomOf="@id/tvDeskripsiDestinasi"
+            app:layout_constraintVertical_bias="0.0"
+            app:tint="#DE5B29"/>
 
         <TextView
             android:id="@+id/tvLokasiDestinasi"
@@ -75,6 +79,7 @@
             android:layout_marginBottom="16dp"
             android:text="@string/name"
             android:textSize="12sp"
+            android:textColor="#DE5B29"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/icLocation"

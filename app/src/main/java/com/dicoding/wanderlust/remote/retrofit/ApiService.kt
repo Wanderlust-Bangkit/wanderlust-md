@@ -39,11 +39,13 @@ interface ApiService {
         @Path("category") category: String
     ): DestinationResponse
 
+    @FormUrlEncoded
     @POST("addFavorit")
     suspend fun addFavorite(
         @Field("destinationId") destinationId: String
     ): CommonResponse
 
+    @FormUrlEncoded
     @POST("deleteFavorit")
     suspend fun deleteFavorite(
         @Field("destinationId") destinationId: String
