@@ -6,22 +6,32 @@ import android.util.Log
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.wanderlust.R
 import com.dicoding.wanderlust.data.ResultState
 import com.dicoding.wanderlust.databinding.ActivityDestinationDetailBinding
 import com.dicoding.wanderlust.remote.response.DataItem
 import com.dicoding.wanderlust.ui.ViewModelFactory
+import com.dicoding.wanderlust.ui.adapter.DestinationAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.Locale
+import kotlin.math.min
 
 class DestinationDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDestinationDetailBinding
+    private lateinit var nearestDestinationAdapter: DestinationAdapter
 
     private val viewModel by viewModels<DestinationViewModel> {
         ViewModelFactory.getInstance(this)
     }
 
     private var currentDataItem: DataItem? = null
+    private var nearestDestinations: List<DataItem> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +42,7 @@ class DestinationDetailActivity : AppCompatActivity() {
         if (dataItem != null) {
             currentDataItem = dataItem
             showDetail(dataItem)
+            fetchNearestDestinations(dataItem)
         }
 
         binding.fabFavorite.setOnClickListener {
@@ -77,6 +88,50 @@ class DestinationDetailActivity : AppCompatActivity() {
         }
     }
 
+    private fun fetchNearestDestinations(dataItem: DataItem) {
+        lifecycleScope.launch {
+            viewModel.getNearestDestinations(dataItem.lat ?: 0.0, dataItem.lon ?: 0.0).collect { resultState ->
+                when (resultState) {
+                    is ResultState.Success -> {
+                        // Filter out null items and create a list of non-null DataItem objects
+                        nearestDestinations = resultState.data.data?.filterNotNull() ?: emptyList()
+                        updateNearestDestinationsUI(nearestDestinations)
+                    }
+                    is ResultState.Error -> {
+                        Log.e("DestinationDetail", "Error fetching nearest destinations: ${resultState.error}")
+                        // Handle error state if needed
+                    }
+                    is ResultState.Loading -> {
+                        // Show loading state if needed
+                    }
+                }
+            }
+        }
+    }
+
+
+    private fun updateNearestDestinationsUI(destinations: List<DataItem>) {
+        val top8NearestDestinations = destinations.take(8) // Take the top 8 nearest destinations
+
+        nearestDestinationAdapter = DestinationAdapter { destination ->
+            navigateToDestinationDetail(destination)
+        }
+        binding.rvNearestDestinations.apply {
+            adapter = nearestDestinationAdapter
+            layoutManager = LinearLayoutManager(this@DestinationDetailActivity, LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+        }
+
+        nearestDestinationAdapter.submitList(top8NearestDestinations)
+    }
+
+    private fun navigateToDestinationDetail(destination: DataItem) {
+        val intent = Intent(this, DestinationDetailActivity::class.java).apply {
+            putExtra(EXTRA_DESTINATION, destination)
+        }
+        startActivity(intent)
+    }
+
     private fun observeViewModel() {
         viewModel.favoriteResult.observe(this) { result ->
             when (result) {
@@ -93,9 +148,8 @@ class DestinationDetailActivity : AppCompatActivity() {
                 }
 
                 is ResultState.Loading -> {
-                    // Nothing to do
+                    // You can show a progress indicator here if needed
                 }
-
             }
         }
     }
@@ -104,4 +158,3 @@ class DestinationDetailActivity : AppCompatActivity() {
         const val EXTRA_DESTINATION = "extra_destination"
     }
 }
-
