@@ -3,6 +3,7 @@ package com.dicoding.wanderlust.remote.retrofit
 import com.dicoding.wanderlust.remote.response.CommonResponse
 import com.dicoding.wanderlust.remote.response.DestinationResponse
 import com.dicoding.wanderlust.remote.response.LoginResponse
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -39,11 +40,13 @@ interface ApiService {
         @Path("category") category: String
     ): DestinationResponse
 
+    @FormUrlEncoded
     @POST("addFavorit")
     suspend fun addFavorite(
         @Field("destinationId") destinationId: String
     ): CommonResponse
 
+    @FormUrlEncoded
     @POST("deleteFavorit")
     suspend fun deleteFavorite(
         @Field("destinationId") destinationId: String

@@ -76,7 +76,9 @@ class LoginActivity : AppCompatActivity() {
                                 UserModel(
                                     sessionData.loginResult?.name ?: "",
                                     sessionData.loginResult?.email ?: "",
+                                    sessionData.loginResult?.userId ?: "",
                                     sessionData.loginResult?.token ?: "",
+                                    "",
                                     true
                                 )
                             )

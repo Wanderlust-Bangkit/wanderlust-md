@@ -19,18 +19,15 @@ class Repository private constructor(
     private val userPreference: UserPreference
 ) {
 
-    fun register(name: String, email: String, password: String
-    ): Flow<ResultState<CommonResponse>> = flow {
+    fun register(name: String, email: String, password: String): Flow<ResultState<CommonResponse>> = flow {
         emit(ResultState.Loading)
         try {
             val response = apiService.register(name, email, password)
-
             if (response.error == true) {
                 emit(ResultState.Error(response.message.toString()))
             } else {
                 emit(ResultState.Success(response))
             }
-
         } catch (exc: HttpException) {
             val errorBody = exc.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, CommonResponse::class.java)
@@ -38,18 +35,26 @@ class Repository private constructor(
         }
     }.flowOn(Dispatchers.IO)
 
-    fun login( email: String, password: String
-    ): Flow<ResultState<LoginResponse>> = flow {
+    fun login(email: String, password: String): Flow<ResultState<LoginResponse>> = flow {
         emit(ResultState.Loading)
         try {
             val response = apiService.login(email, password)
-
             if (response.error == true) {
                 emit(ResultState.Error(response.message.toString()))
             } else {
+                response.loginResult?.let { loginResult ->
+                    val user = UserModel(
+                        loginResult.email ?: "",
+                        loginResult.name ?: "",
+                        loginResult.userId ?: "",
+                        loginResult.token ?: "",
+                        "",
+                        true
+                    )
+                    saveSession(user)
+                }
                 emit(ResultState.Success(response))
             }
-
         } catch (exc: HttpException) {
             val errorBody = exc.response()?.errorBody()?.string()
             val errorResponse = Gson().fromJson(errorBody, LoginResponse::class.java)
@@ -74,7 +79,9 @@ class Repository private constructor(
     }
 
     suspend fun findDestination(keyword: String): DestinationResponse {
-        if (keyword.isEmpty()){ getAllDestinations() }
+        if (keyword.isEmpty()) {
+            getAllDestinations()
+        }
         return apiService.findDestination(keyword)
     }
 
@@ -82,13 +89,44 @@ class Repository private constructor(
         return apiService.getDestinationByCategory(category)
     }
 
+    suspend fun getAllFavorites(userId: String): DestinationResponse {
+        return apiService.getAllFavorites(userId)
+    }
+
+    fun addFavorite(destinationId: String): Flow<ResultState<CommonResponse>> = flow {
+        try {
+            val response = apiService.addFavorite(destinationId)
+            if (response.error == true) {
+                emit(ResultState.Error(response.message.toString()))
+            } else {
+                emit(ResultState.Success(response))
+            }
+        } catch (exc: HttpException) {
+            val errorBody = exc.response()?.errorBody()?.string()
+            val errorResponse = Gson().fromJson(errorBody, CommonResponse::class.java)
+            emit(ResultState.Error(errorResponse.message.toString()))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    fun deleteFavorite(destinationId: String): Flow<ResultState<CommonResponse>> = flow {
+        try {
+            val response = apiService.deleteFavorite(destinationId)
+            if (response.error == true) {
+                emit(ResultState.Error(response.message.toString()))
+            } else {
+                emit(ResultState.Success(response))
+            }
+        } catch (exc: HttpException) {
+            val errorBody = exc.response()?.errorBody()?.string()
+            val errorResponse = Gson().fromJson(errorBody, CommonResponse::class.java)
+            emit(ResultState.Error(errorResponse.message.toString()))
+        }
+    }.flowOn(Dispatchers.IO)
+
     companion object {
         @Volatile
         private var instance: Repository? = null
-        fun getInstance(
-            apiService: ApiService,
-            userPreference: UserPreference
-        ): Repository =
+        fun getInstance(apiService: ApiService, userPreference: UserPreference): Repository =
             instance ?: synchronized(this) {
                 instance ?: Repository(apiService, userPreference)
             }.also { instance = it }
