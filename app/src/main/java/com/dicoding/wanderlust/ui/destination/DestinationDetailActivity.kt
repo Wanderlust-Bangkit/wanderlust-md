@@ -95,6 +95,7 @@ class DestinationDetailActivity : AppCompatActivity() {
                 is ResultState.Loading -> {
                     // Nothing to do
                 }
+
             }
         }
     }
