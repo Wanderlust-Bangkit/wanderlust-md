@@ -7,7 +7,8 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -22,7 +23,7 @@
                 android:background="?attr/colorPrimary"
                 android:paddingTop="24dp"
                 android:paddingBottom="8dp"
-                app:layout_collapseMode="pin">
+                app:layout_collapseMode="parallax">
 
                 <TextView
                     android:id="@+id/tv_welcome"
@@ -48,25 +49,27 @@
                     android:layout_marginTop="8dp"
                     android:textColor="@android:color/white"/>
 
-                <EditText
-                    android:id="@+id/search_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autofillHints=""
-                    android:hint="@string/searchbar_hint"
-                    android:background="@drawable/rounded_edittext_background"
-                    android:padding="12dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="24dp"
-                    android:drawableStart="@drawable/ic_search"
-                    android:drawablePadding="8dp"
-                    android:inputType="text" />
-
             </LinearLayout>
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <!-- Search Bar -->
+        <EditText
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:hint="@string/searchbar_hint"
+            android:background="@drawable/rounded_edittext_background"
+            android:padding="12dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="8dp"
+            android:inputType="text"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+            app:layout_collapseMode="pin"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
