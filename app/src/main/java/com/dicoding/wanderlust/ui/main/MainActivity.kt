@@ -10,7 +10,6 @@ import com.dicoding.wanderlust.R
 import com.dicoding.wanderlust.databinding.ActivityMainBinding
 import com.dicoding.wanderlust.ui.ViewModelFactory
 import com.dicoding.wanderlust.ui.login.LoginActivity
-import com.dicoding.wanderlust.ui.register.RegisterActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -40,6 +39,13 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
+
+        if (intent.hasExtra("fragment")) {
+            val fragment = intent.getStringExtra("fragment")
+            if (fragment == "ItineraryFragment") {
+                navController.navigate(R.id.navigation_itinerary)
+            }
+        }
 
         navController.navigate(R.id.navigation_home)
     }

@@ -29,7 +29,7 @@
     <string name="login">Masuk</string>
     <string name="kategori">Kategori</string>
     <string name="destinasi_yang_mungkin_kamu_sukai">Destinasi yang mungkin kamu sukai</string>
-    <string name="destinasi_terdekat">Destinasi terdekat</string>
+    <string name="destinasi_terdekat">Destinasi Terdekat</string>
     <string name="searchbar_hint">Apa yang ingin kamu cari</string>
     <string name="jelajahi_indonesia_dengan_wanderlust">Jelajahi Indonesia dengan Wanderlust.</string>
     <string name="buat_rencana">Buat Rencana</string>
@@ -75,4 +75,19 @@
     <string name="batal">Batal</string>
     <string name="apakah_anda_yakin_ingin_keluar_dari_akun_anda">Apakah Anda yakin ingin keluar dari akun Anda?</string>
     <string name="anda_belum_memiliki_daftar_destinasi_favorit">Anda belum memiliki daftar destinasi favorit.</string>
+    <string name="title_itinerary">Liburan ke Jakarta</string>
+    <string name="date_itinerary">%1$s - %2$s</string>
+    <string name="no_itinerary">Anda belum merencanakan perjalanan.</string>
+    <string name="rencanakan_perjalanan">Rencanakan Perjalanan</string>
+    <string name="callout_itinerary">Buat dan susun rencana perjalanan\nAnda yang akan datang</string>
+    <string name="tanggal_pergi">Tanggal Pergi</string>
+    <string name="tanggal_pulang">Tanggal Pulang</string>
+    <string name="lanjut">Lanjut</string>
+    <string name="nama_trip">Nama Trip</string>
+    <string name="tujuan">Tujuan</string>
+    <string name="pilih">Pilih</string>
+    <string name="apa_yang_paling_anda_nikmati_ketika_berpergian">Apa yang paling Anda nikmati\nketika berpergian?</string>
+    <string name="pilih_minat_anda">Pilih beberapa minat Anda</string>
+    <string name="opt_cagar_alam">Cagar Alam</string>
+    <string name="day_count">Hari ke-%1$d</string>
 </resources>

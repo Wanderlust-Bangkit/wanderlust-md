@@ -1,7 +1,9 @@
 package com.dicoding.wanderlust.remote.retrofit
 
+import com.dicoding.wanderlust.data.model.Itinerary
 import com.dicoding.wanderlust.remote.response.CommonResponse
 import com.dicoding.wanderlust.remote.response.DestinationResponse
+import com.dicoding.wanderlust.remote.response.ItineraryResponse
 import com.dicoding.wanderlust.remote.response.LoginResponse
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -43,18 +45,37 @@ interface ApiService {
     @FormUrlEncoded
     @POST("addFavorit")
     suspend fun addFavorite(
+        @Field("userId") userId: String,
         @Field("destinationId") destinationId: String
     ): CommonResponse
 
     @FormUrlEncoded
     @POST("deleteFavorit")
     suspend fun deleteFavorite(
+        @Field("userId") userId: String,
         @Field("destinationId") destinationId: String
     ): CommonResponse
 
     @GET("favorit/{userId}")
     suspend fun getAllFavorites(
         @Path("userId") userId: String
+    ): DestinationResponse
+
+    @GET("getItinerary/{userId}")
+    suspend fun getAllItineraries(
+        @Path("userId") userId: String
+    ): ItineraryResponse
+
+    @POST("createItinerary")
+    suspend fun createItinerary(
+        @Body itinerary: Itinerary
+    ): CommonResponse
+
+    @FormUrlEncoded
+    @POST("suggestion")
+    suspend fun generateItinerary(
+        @Field("category") nameItenarary: String,
+        @Field("city") location: String,
     ): DestinationResponse
 
 }

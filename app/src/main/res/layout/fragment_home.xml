@@ -32,7 +32,7 @@
                     android:fontFamily="@font/roboto_bold"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/halo_nama"
                     android:textColor="@android:color/white"
                     android:textSize="24sp"
@@ -63,7 +63,7 @@
             android:padding="12dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="8dp"
@@ -109,6 +109,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/tulisan_banner"
                         android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="8dp"
                         android:textColor="@android:color/black"/>
 
                     <Button

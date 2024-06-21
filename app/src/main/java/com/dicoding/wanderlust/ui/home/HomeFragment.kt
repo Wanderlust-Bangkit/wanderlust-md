@@ -22,6 +22,7 @@ import com.dicoding.wanderlust.ui.adapter.DestinationAdapter
 import com.dicoding.wanderlust.ui.destination.DestinationCategoryActivity
 import com.dicoding.wanderlust.ui.destination.DestinationDetailActivity
 import com.dicoding.wanderlust.ui.destination.SearchActivity
+import com.dicoding.wanderlust.ui.itinerary.AddItineraryActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -54,6 +55,10 @@ class HomeFragment : Fragment() {
         observeViewModel()
 
         homeViewModel.getDestinations()
+        binding.btnBuatRencana.setOnClickListener {
+            val intent = Intent(activity, AddItineraryActivity::class.java)
+            startActivity(intent)
+        }
 
         return root
     }
@@ -157,7 +162,6 @@ class HomeFragment : Fragment() {
     private fun getCurrentLocation(destinations: List<DataItem>) {
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
             return
         }
 
@@ -166,7 +170,6 @@ class HomeFragment : Fragment() {
                 val nearestDestinations = getNearestDestinations(location, destinations)
                 nearestDestinationAdapter.submitList(nearestDestinations)
 
-                // Log nearest destinations
                 nearestDestinations.forEach { destination ->
                     Log.d("HomeFragment", "Nearest Destination: ${destination.placeName} at (${destination.lat}, ${destination.lon})")
                 }
@@ -190,10 +193,8 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 100
-    }
 }
+
 
 
 

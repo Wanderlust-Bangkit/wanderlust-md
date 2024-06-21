@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.wanderlust.R
@@ -15,11 +14,8 @@ import com.dicoding.wanderlust.databinding.ActivityDestinationDetailBinding
 import com.dicoding.wanderlust.remote.response.DataItem
 import com.dicoding.wanderlust.ui.ViewModelFactory
 import com.dicoding.wanderlust.ui.adapter.DestinationAdapter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.Locale
-import kotlin.math.min
 
 class DestinationDetailActivity : AppCompatActivity() {
 
@@ -42,6 +38,7 @@ class DestinationDetailActivity : AppCompatActivity() {
         if (dataItem != null) {
             currentDataItem = dataItem
             showDetail(dataItem)
+            dataItem.id?.let { viewModel.checkIfFavorite(it) } // Panggil fungsi checkIfFavorite()
             fetchNearestDestinations(dataItem)
         }
 
@@ -136,20 +133,23 @@ class DestinationDetailActivity : AppCompatActivity() {
         viewModel.favoriteResult.observe(this) { result ->
             when (result) {
                 is ResultState.Success -> {
-                    if (viewModel.isFavorite()) {
-                        binding.fabFavorite.setImageResource(R.drawable.ic_favorite)
-                    } else {
-                        binding.fabFavorite.setImageResource(R.drawable.ic_favorite_border)
-                    }
+                    // Do nothing here, as the favorite status is handled by isFavorite observer
                 }
-
                 is ResultState.Error -> {
                     Log.e("Favorite", "Error loading data: ${result.error}")
+                    // Handle error state if needed
                 }
-
                 is ResultState.Loading -> {
                     // You can show a progress indicator here if needed
                 }
+            }
+        }
+
+        viewModel.isFavorite.observe(this) { isFavorite ->
+            if (isFavorite) {
+                binding.fabFavorite.setImageResource(R.drawable.ic_favorite)
+            } else {
+                binding.fabFavorite.setImageResource(R.drawable.ic_favorite_border)
             }
         }
     }

@@ -1,6 +1,8 @@
 package com.dicoding.wanderlust.ui.register
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -9,6 +11,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.dicoding.wanderlust.R
 import com.dicoding.wanderlust.data.ResultState
 import com.dicoding.wanderlust.databinding.ActivityRegisterBinding
@@ -81,7 +84,7 @@ class RegisterActivity : AppCompatActivity() {
                             binding.progressBar.visibility = View.GONE
 
                             showToast(resultState.data.message.toString())
-                            navigateToLogin()
+                            requestLocationPermission()
                         }
                     }
                 }
@@ -121,6 +124,26 @@ class RegisterActivity : AppCompatActivity() {
         return isValid
     }
 
+    private fun requestLocationPermission() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+        } else {
+            navigateToLogin()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                navigateToLogin()
+            } else {
+                navigateToLogin()
+            }
+        }
+    }
+
     private fun navigateToLogin() {
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -134,6 +157,10 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 100
     }
 }
 

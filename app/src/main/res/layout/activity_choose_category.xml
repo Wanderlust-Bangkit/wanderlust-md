@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.itinerary.ChooseCategoryActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="400dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Blue Section -->
+    <View
+        android:id="@+id/blueSection"
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!-- Back Button -->
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/image"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@android:color/white" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/apa_yang_paling_anda_nikmati_ketika_berpergian"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/pilih_minat_anda"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <!-- Category Grid -->
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:columnCount="2"
+        app:layout_constraintTop_toBottomOf="@id/blueSection"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:orientation="horizontal"
+        app:rowCount="3">
+
+        <!-- Categories -->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+            <ImageView
+                android:id="@+id/cagar_alam"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:contentDescription="@string/cagar_alam"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pic_cagar_alam"/>
+            <TextView
+                android:id="@+id/tv_cagar_alam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/opt_cagar_alam"
+                android:layout_margin="16dp"
+                android:textColor="@android:color/white"
+                android:layout_gravity="bottom|start" />
+            <CheckBox
+                android:id="@+id/check_cagar_alam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:button="@drawable/checkbox_selector"
+                android:buttonTint="@android:color/white"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+            <ImageView
+                android:id="@+id/budaya"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:contentDescription="@string/budaya"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pic_budaya"/>
+            <TextView
+                android:id="@+id/tv_budaya"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/budaya"
+                android:layout_margin="16dp"
+                android:textColor="@android:color/white"
+                android:layout_gravity="bottom|start" />
+            <CheckBox
+                android:id="@+id/check_budaya"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:button="@drawable/checkbox_selector"
+                android:buttonTint="@android:color/white"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+            <ImageView
+                android:id="@+id/taman_hiburan"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:contentDescription="@string/taman_hiburan"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pic_taman_hiburan"/>
+            <TextView
+                android:id="@+id/tv_taman_hiburan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/taman_hiburan"
+                android:layout_margin="16dp"
+                android:textColor="@android:color/white"
+                android:layout_gravity="bottom|start" />
+            <CheckBox
+                android:id="@+id/check_taman_hiburan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:button="@drawable/checkbox_selector"
+                android:buttonTint="@android:color/white"/>
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+            <ImageView
+                android:id="@+id/tempat_ibadah"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:contentDescription="@string/tempat_ibadah"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pic_tempat_ibadah"/>
+            <TextView
+                android:id="@+id/tv_tempat_ibadah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tempat_ibadah"
+                android:layout_margin="16dp"
+                android:textColor="@android:color/white"
+                android:layout_gravity="bottom|start" />
+            <CheckBox
+                android:id="@+id/check_tempat_ibadah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:button="@drawable/checkbox_selector"
+                android:buttonTint="@android:color/white"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+            <ImageView
+                android:id="@+id/pusat_perbelanjaan"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:contentDescription="@string/pusat_perbelanjaan"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pic_pusat_perbelanjaan"/>
+            <TextView
+                android:id="@+id/tv_pusat_perbelanjaan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pusat_perbelanjaan"
+                android:layout_margin="16dp"
+                android:textColor="@android:color/white"
+                android:layout_gravity="bottom|start" />
+            <CheckBox
+                android:id="@+id/check_pusat_perbelanjaan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:button="@drawable/checkbox_selector"
+                android:buttonTint="@android:color/white"/>
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+            <ImageView
+                android:id="@+id/bahari"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:contentDescription="@string/bahari"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pic_bahari"/>
+            <TextView
+                android:id="@+id/tv_bahari"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bahari"
+                android:layout_margin="16dp"
+                android:textColor="@android:color/white"
+                android:layout_gravity="bottom|start" />
+            <CheckBox
+                android:id="@+id/check_bahari"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:button="@drawable/checkbox_selector"
+                android:buttonTint="@android:color/white"/>
+        </FrameLayout>
+
+    </androidx.gridlayout.widget.GridLayout>
+
+    <!-- Button -->
+    <Button
+        android:id="@+id/btn_continue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/buat_rencana"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

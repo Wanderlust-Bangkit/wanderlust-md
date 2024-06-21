@@ -3,7 +3,7 @@
 
     <!-- Custom style for the Batal button -->
     <style name="Button.Batal" parent="Widget.MaterialComponents.Button">
-        <item name="android:background">@drawable/rounded_button_secondary</item>
+        <item name="android:background">@drawable/circle_background</item>
         <!-- Add any other custom attributes as needed -->
     </style>
 
