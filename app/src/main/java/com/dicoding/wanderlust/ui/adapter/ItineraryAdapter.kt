@@ -18,10 +18,10 @@ class ItineraryAdapter(private val onItemClick: (ItineraryItem) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val destination = getItem(position)
-        holder.bind(destination)
+        val itinerary = getItem(position)
+        holder.bind(itinerary)
         holder.itemView.setOnClickListener {
-            onItemClick(destination)
+            onItemClick(itinerary)
         }
     }
 

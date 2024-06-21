@@ -7,6 +7,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.itinerary.ChooseCategoryActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="400dp"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!-- Blue Section -->
     <View
         android:id="@+id/blueSection"
@@ -30,7 +42,8 @@
         android:src="@drawable/ic_arrow_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@android:color/white" />
+        app:tint="@android:color/white"
+        android:onClick="onBackClicked" />
 
     <!-- Title -->
     <TextView

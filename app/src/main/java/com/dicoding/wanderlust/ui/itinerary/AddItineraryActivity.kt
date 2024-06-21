@@ -9,12 +9,14 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.dicoding.wanderlust.R
 import com.dicoding.wanderlust.ui.ViewModelFactory
+import com.dicoding.wanderlust.ui.main.MainActivity
 import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -49,7 +51,6 @@ class AddItineraryActivity : AppCompatActivity() {
         setupLocationSpinner()
         setupDatePickers()
 
-        // Observe userId from viewModel
         itineraryViewModel.userId.observe(this) { userId ->
             userId?.let {
                 setupContinueButton(userId)
@@ -58,6 +59,12 @@ class AddItineraryActivity : AppCompatActivity() {
                 Toast.makeText(this, "User ID not available", Toast.LENGTH_SHORT).show()
             }
         }
+
+        val ivBack = findViewById<ImageView>(R.id.iv_back)
+        ivBack.setOnClickListener {
+            navigateToMainActivity()
+        }
+
     }
 
     private fun setupContinueButton(userId: String) {
@@ -139,5 +146,12 @@ class AddItineraryActivity : AppCompatActivity() {
                 selectedLocation != null &&
                 editTextDepartureDate.text.toString().isNotEmpty() &&
                 editTextReturnDate.text.toString().isNotEmpty()
+    }
+
+    private fun navigateToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("fragment", "ItineraryFragment")
+        startActivity(intent)
+        finish()
     }
 }

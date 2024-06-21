@@ -28,7 +28,17 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getSession().observe(this) { user ->
             if (user.isLogin) {
-                setupNavigation()
+                if (intent.hasExtra("fragment")) {
+                    val fragment = intent.getStringExtra("fragment")
+                    if (fragment == "ItineraryFragment") {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.nav_host_fragment_activity_main, ItineraryFragment())
+                            .commit()
+                    }
+                    setupNavigation()
+                } else {
+                    setupNavigation()
+                }
             } else {
                 navigateToLogin()
             }
@@ -47,14 +57,6 @@ class MainActivity : AppCompatActivity() {
     private fun navigateToLogin() {
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
-    }
-
-    fun navigateToItineraryFragment() {
-        val itineraryFragment = ItineraryFragment()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.nav_host_fragment_activity_main, itineraryFragment)
-            .addToBackStack(null)
-            .commit()
     }
 
 }

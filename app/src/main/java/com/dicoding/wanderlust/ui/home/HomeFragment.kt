@@ -22,6 +22,7 @@ import com.dicoding.wanderlust.ui.adapter.DestinationAdapter
 import com.dicoding.wanderlust.ui.destination.DestinationCategoryActivity
 import com.dicoding.wanderlust.ui.destination.DestinationDetailActivity
 import com.dicoding.wanderlust.ui.destination.SearchActivity
+import com.dicoding.wanderlust.ui.itinerary.AddItineraryActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -54,6 +55,10 @@ class HomeFragment : Fragment() {
         observeViewModel()
 
         homeViewModel.getDestinations()
+        binding.btnBuatRencana.setOnClickListener {
+            val intent = Intent(activity, AddItineraryActivity::class.java)
+            startActivity(intent)
+        }
 
         return root
     }

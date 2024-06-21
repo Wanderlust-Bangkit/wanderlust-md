@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.wanderlust.data.ResultState
 import com.dicoding.wanderlust.databinding.FragmentItineraryBinding
 import com.dicoding.wanderlust.remote.response.ItineraryItem
@@ -50,8 +51,9 @@ class ItineraryFragment : Fragment() {
             onDataItemClicked(itineraryItem)
         }
         binding.rvItinerary.apply {
+            layoutManager = LinearLayoutManager(context)
             adapter = itineraryAdapter
-            setHasFixedSize(true)
+            visibility = View.GONE
         }
     }
 
@@ -107,4 +109,5 @@ class ItineraryFragment : Fragment() {
         _binding = null
     }
 }
+
 

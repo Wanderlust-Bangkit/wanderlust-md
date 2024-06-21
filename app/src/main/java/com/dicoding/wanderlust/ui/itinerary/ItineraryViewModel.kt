@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.dicoding.wanderlust.data.ResultState
+import com.dicoding.wanderlust.data.model.Itinerary
+import com.dicoding.wanderlust.data.model.Plan
 import com.dicoding.wanderlust.remote.response.CommonResponse
 import com.dicoding.wanderlust.remote.response.DestinationResponse
 import com.dicoding.wanderlust.remote.response.ItineraryItem
@@ -19,6 +21,9 @@ class ItineraryViewModel(private val repository: Repository) : ViewModel() {
 
     private val _itineraryList = MutableLiveData<ResultState<List<ItineraryItem>>>()
     val itineraryList: LiveData<ResultState<List<ItineraryItem>>> = _itineraryList
+
+    private val _createItineraryResult = MutableLiveData<ResultState<CommonResponse>>()
+    val createItineraryResult: LiveData<ResultState<CommonResponse>> get() = _createItineraryResult
 
     private val _userId = MutableLiveData<String>()
     val userId: LiveData<String> = _userId
@@ -82,22 +87,28 @@ class ItineraryViewModel(private val repository: Repository) : ViewModel() {
         startDate: String,
         endDate: String,
         userId: String,
-        planItems: List<PlanItem>
-    ): LiveData<ResultState<CommonResponse>> = liveData {
-        Log.d("ItineraryViewModel", "Creating itinerary with parameters:")
-        Log.d("ItineraryViewModel", "Name: $name")
-        Log.d("ItineraryViewModel", "Location: $location")
-        Log.d("ItineraryViewModel", "Start Date: $startDate")
-        Log.d("ItineraryViewModel", "End Date: $endDate")
-        Log.d("ItineraryViewModel", "User ID: $userId")
-        Log.d("ItineraryViewModel", "Plan Items: $planItems")
+        plansItems: List<PlanItem>
+    ) {
+        _createItineraryResult.value = ResultState.Loading
+        viewModelScope.launch {
+            try {
+                val plans = plansItems.map { planItem ->
+                    planItem.day?.let { Plan(day = it, destinations = planItem.destinations) }
+                }
 
-        emit(ResultState.Loading)
-        try {
-            val response = repository.createItinerary(name, location, startDate, endDate, userId, planItems)
-            emit(ResultState.Success(response))
-        } catch (e: Exception) {
-            emit(ResultState.Error(e.toString()))
+                val itinerary = Itinerary(
+                    nameItenarary = name,
+                    endDate = endDate,
+                    location = location,
+                    userId = userId,
+                    plan = plans,
+                    startDate = startDate
+                )
+                val response = repository.createItinerary(itinerary)
+                _createItineraryResult.value = ResultState.Success(response)
+            } catch (e: Exception) {
+                _createItineraryResult.value = ResultState.Error(e.toString())
+            }
         }
     }
 

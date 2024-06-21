@@ -1,13 +1,13 @@
 package com.dicoding.wanderlust.repository
 
 import com.dicoding.wanderlust.data.ResultState
+import com.dicoding.wanderlust.data.model.Itinerary
 import com.dicoding.wanderlust.data.model.UserModel
 import com.dicoding.wanderlust.data.pref.UserPreference
 import com.dicoding.wanderlust.remote.response.CommonResponse
 import com.dicoding.wanderlust.remote.response.DestinationResponse
 import com.dicoding.wanderlust.remote.response.ItineraryResponse
 import com.dicoding.wanderlust.remote.response.LoginResponse
-import com.dicoding.wanderlust.remote.response.PlanItem
 import com.dicoding.wanderlust.remote.retrofit.ApiService
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +15,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import retrofit2.HttpException
+import kotlin.math.atan2
+import kotlin.math.cos
+import kotlin.math.sin
+import kotlin.math.sqrt
 
 class Repository private constructor(
     private val apiService: ApiService,
@@ -95,7 +99,7 @@ class Repository private constructor(
 
     suspend fun isFavorite(userId: String, destinationId: String): Boolean {
         val response = getAllFavorites(userId)
-        return response.data?.any { it?.id == destinationId } ?: false
+        return response.data?.any { it.id == destinationId } ?: false
     }
 
     fun addFavorite(userId: String, destinationId: String): Flow<ResultState<CommonResponse>> = flow {
@@ -132,8 +136,8 @@ class Repository private constructor(
         val allDestinations = getAllDestinations().data ?: emptyList()
 
         // Calculate distances and sort by nearest
-        val nearestDestinations = allDestinations.mapNotNull { dataItem ->
-            dataItem?.let {
+        val nearestDestinations = allDestinations.map { dataItem ->
+            dataItem.let {
                 val distance = calculateDistance(latitude, longitude, it.lat ?: 0.0, it.lon ?: 0.0)
                 Pair(it, distance)
             }
@@ -149,10 +153,10 @@ class Repository private constructor(
         val radius = 6371 // Earth radius in kilometers
         val dLat = Math.toRadians(lat2 - lat1)
         val dLon = Math.toRadians(lon2 - lon1)
-        val a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2)
-        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+        val a = sin(dLat / 2) * sin(dLat / 2) +
+                cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) *
+                sin(dLon / 2) * sin(dLon / 2)
+        val c = 2 * atan2(sqrt(a), sqrt(1 - a))
         return radius * c // Distance in kilometers
     }
 
@@ -164,15 +168,8 @@ class Repository private constructor(
         return apiService.generateItinerary(category, location)
     }
 
-    suspend fun createItinerary(
-        name: String,
-        location: String,
-        startDate: String,
-        endDate: String,
-        userId: String,
-        planItems: List<PlanItem>
-    ): CommonResponse {
-        return apiService.createItinerary(name, location, startDate, endDate, userId, planItems)
+    suspend fun createItinerary(itinerary: Itinerary): CommonResponse {
+        return apiService.createItinerary(itinerary)
     }
 
     companion object {

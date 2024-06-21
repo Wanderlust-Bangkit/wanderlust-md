@@ -1,10 +1,11 @@
 package com.dicoding.wanderlust.remote.retrofit
 
+import com.dicoding.wanderlust.data.model.Itinerary
 import com.dicoding.wanderlust.remote.response.CommonResponse
 import com.dicoding.wanderlust.remote.response.DestinationResponse
 import com.dicoding.wanderlust.remote.response.ItineraryResponse
 import com.dicoding.wanderlust.remote.response.LoginResponse
-import com.dicoding.wanderlust.remote.response.PlanItem
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -65,15 +66,9 @@ interface ApiService {
         @Path("userId") userId: String
     ): ItineraryResponse
 
-    @FormUrlEncoded
     @POST("createItinerary")
     suspend fun createItinerary(
-        @Field("nameItenarary") nameItenarary: String,
-        @Field("location") location: String,
-        @Field("startDate") startDate: String,
-        @Field("endDate") endDate: String,
-        @Field("userId") userId: String,
-        @Field("plan") plan: List<PlanItem>
+        @Body itinerary: Itinerary
     ): CommonResponse
 
     @FormUrlEncoded
