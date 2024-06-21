@@ -114,28 +114,41 @@ class AddItineraryActivity : AppCompatActivity() {
         editTextDepartureDate.inputType = InputType.TYPE_NULL
         editTextReturnDate.inputType = InputType.TYPE_NULL
 
-        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month)
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            updateLabel(editTextDepartureDate)
+        // Date picker dialog for departure date
+        editTextDepartureDate.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                showDatePickerDialog(editTextDepartureDate)
+            }
         }
 
-        editTextDepartureDate.setOnClickListener {
-            DatePickerDialog(this, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
-        }
-
-        val returnDateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month)
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            updateLabel(editTextReturnDate)
-        }
-
-        editTextReturnDate.setOnClickListener {
-            DatePickerDialog(this, returnDateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
+        // Date picker dialog for return date
+        editTextReturnDate.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                showDatePickerDialog(editTextReturnDate)
+            }
         }
     }
+
+    private fun showDatePickerDialog(editText: TextInputEditText) {
+        val initialYear = calendar.get(Calendar.YEAR)
+        val initialMonth = calendar.get(Calendar.MONTH)
+        val initialDay = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                calendar.set(Calendar.YEAR, year)
+                calendar.set(Calendar.MONTH, month)
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateLabel(editText)
+            },
+            initialYear,
+            initialMonth,
+            initialDay
+        )
+        datePickerDialog.show()
+    }
+
 
     private fun updateLabel(editText: TextInputEditText) {
         editText.setText(dateFormat.format(calendar.time))

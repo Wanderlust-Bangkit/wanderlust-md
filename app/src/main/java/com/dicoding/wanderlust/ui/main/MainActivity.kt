@@ -9,7 +9,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.dicoding.wanderlust.R
 import com.dicoding.wanderlust.databinding.ActivityMainBinding
 import com.dicoding.wanderlust.ui.ViewModelFactory
-import com.dicoding.wanderlust.ui.itinerary.ItineraryFragment
 import com.dicoding.wanderlust.ui.login.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -28,17 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getSession().observe(this) { user ->
             if (user.isLogin) {
-                if (intent.hasExtra("fragment")) {
-                    val fragment = intent.getStringExtra("fragment")
-                    if (fragment == "ItineraryFragment") {
-                        supportFragmentManager.beginTransaction()
-                            .replace(R.id.nav_host_fragment_activity_main, ItineraryFragment())
-                            .commit()
-                    }
-                    setupNavigation()
-                } else {
-                    setupNavigation()
-                }
+                setupNavigation()
             } else {
                 navigateToLogin()
             }
@@ -50,6 +39,13 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
+
+        if (intent.hasExtra("fragment")) {
+            val fragment = intent.getStringExtra("fragment")
+            if (fragment == "ItineraryFragment") {
+                navController.navigate(R.id.navigation_itinerary)
+            }
+        }
 
         navController.navigate(R.id.navigation_home)
     }

@@ -6,7 +6,6 @@ import android.util.Log
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.wanderlust.R
@@ -15,11 +14,8 @@ import com.dicoding.wanderlust.databinding.ActivityDestinationDetailBinding
 import com.dicoding.wanderlust.remote.response.DataItem
 import com.dicoding.wanderlust.ui.ViewModelFactory
 import com.dicoding.wanderlust.ui.adapter.DestinationAdapter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.Locale
-import kotlin.math.min
 
 class DestinationDetailActivity : AppCompatActivity() {
 
@@ -137,13 +133,12 @@ class DestinationDetailActivity : AppCompatActivity() {
         viewModel.favoriteResult.observe(this) { result ->
             when (result) {
                 is ResultState.Success -> {
-                    // Do nothing, as the favorite status is already handled by isFavorite observer
+                    // Do nothing here, as the favorite status is handled by isFavorite observer
                 }
-
                 is ResultState.Error -> {
                     Log.e("Favorite", "Error loading data: ${result.error}")
+                    // Handle error state if needed
                 }
-
                 is ResultState.Loading -> {
                     // You can show a progress indicator here if needed
                 }

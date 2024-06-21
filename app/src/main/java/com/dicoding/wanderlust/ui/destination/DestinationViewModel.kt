@@ -14,7 +14,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import java.lang.Exception
 import kotlinx.coroutines.launch
 
 class DestinationViewModel(private val repository: Repository) : ViewModel() {
@@ -104,12 +103,19 @@ class DestinationViewModel(private val repository: Repository) : ViewModel() {
         currentDestinationId = destinationId
         val userId = _userSession.value?.userId
         if (userId != null) {
-            if (_isFavorite.value == true) {
-                deleteFavorite(userId, destinationId)
-                _isFavorite.postValue(false)
-            } else {
-                addFavorite(userId, destinationId)
-                _isFavorite.postValue(true)
+            viewModelScope.launch {
+                try {
+                    val isCurrentlyFavorite = repository.isFavorite(userId, destinationId)
+                    if (isCurrentlyFavorite) {
+                        deleteFavorite(userId, destinationId)
+                        _isFavorite.postValue(false)
+                    } else {
+                        addFavorite(userId, destinationId)
+                        _isFavorite.postValue(true)
+                    }
+                } catch (e: Exception) {
+                    _favoriteResult.postValue(ResultState.Error(e.message ?: "Failed to toggle favorite status"))
+                }
             }
         } else {
             _favoriteResult.postValue(ResultState.Error("User not logged in"))
